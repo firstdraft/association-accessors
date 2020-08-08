@@ -1,0 +1,21 @@
+<!-- Form model start -->
+<%= form_with(model: @model, local: true) do |f| %>
+<!-- Form model end -->
+
+  <!-- Label and input for name start -->
+  <div class="form-group">
+    <%= f.label :name %>
+    <!-- Input for name start -->
+    <%= f.text_field :name, class: "form-control" %>
+    <!-- Input for name end -->
+  </div>
+  <!-- Label and input for name end -->
+
+  <!-- Label and input for idea_id start -->
+  <!-- Input for idea_id start -->
+  <%= f.hidden_field :idea_id, value: @idea.id %>
+  <!-- Input for idea_id end -->
+  <!-- Label and input for idea_id end -->
+
+  <%= f.submit "Create model", class: "btn btn-block btn-outline-secondary" %>
+<% end %>

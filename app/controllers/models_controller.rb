@@ -8,6 +8,8 @@ class ModelsController < ApplicationController
 
   # GET /models/1
   def show
+    @indirect_association = IndirectAssociation.new
+    @direct_association = DirectAssociation.new
   end
 
   # GET /models/new
@@ -24,7 +26,12 @@ class ModelsController < ApplicationController
     @model = Model.new(model_params)
 
     if @model.save
-      redirect_to @model, notice: 'Model was successfully created.'
+      message = 'Model was successfully created.'
+      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referrer, notice: message
+      else
+        redirect_to @model, notice: message
+      end
     else
       render :new
     end

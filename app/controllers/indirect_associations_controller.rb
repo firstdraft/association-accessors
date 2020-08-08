@@ -24,7 +24,12 @@ class IndirectAssociationsController < ApplicationController
     @indirect_association = IndirectAssociation.new(indirect_association_params)
 
     if @indirect_association.save
-      redirect_to @indirect_association, notice: 'Indirect association was successfully created.'
+      message = 'IndirectAssociation was successfully created.'
+      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referrer, notice: message
+      else
+        redirect_to @indirect_association, notice: message
+      end
     else
       render :new
     end

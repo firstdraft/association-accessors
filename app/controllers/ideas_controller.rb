@@ -8,6 +8,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1
   def show
+    @model = Model.new
   end
 
   # GET /ideas/new
@@ -24,7 +25,12 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
 
     if @idea.save
-      redirect_to @idea, notice: 'Idea was successfully created.'
+      message = 'Idea was successfully created.'
+      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referrer, notice: message
+      else
+        redirect_to @idea, notice: message
+      end
     else
       render :new
     end
