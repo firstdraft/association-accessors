@@ -6,7 +6,7 @@ class Association < ApplicationRecord
   belongs_to :through_association,
              class_name: "Association",
              counter_cache: :indirect_associations_as_through_count,
-             required: false
+             optional: true
 
   has_many   :indirect_associations_as_through,
              class_name: "Association",
@@ -16,7 +16,7 @@ class Association < ApplicationRecord
   belongs_to :source_association,
              class_name: "Association",
              counter_cache: :indirect_associations_as_source_count,
-             required: false
+             optional: true
 
   has_many   :indirect_associations_as_source,
              class_name: "Association",
@@ -27,25 +27,25 @@ class Association < ApplicationRecord
              class_name: "Model",
              foreign_key: "terminus_model_id",
              counter_cache: :indirect_terminating_associations_count,
-             required: false
+             optional: true
 
   belongs_to :indirect_origin_model,
              class_name: "Model",
              foreign_key: "origin_model_id",
              counter_cache: :indirect_originating_associations_count,
-             required: false
+             optional: true
 
   belongs_to :direct_terminus_model,
              class_name: "Model",
              foreign_key: "terminus_model_id",
              counter_cache: :direct_terminating_associations_count,
-             required: false
+             optional: true
 
   belongs_to :direct_origin_model,
              class_name: "Model",
              foreign_key: "origin_model_id",
              counter_cache: :direct_originating_associations_count,
-             required: false
+             optional: true
 
   belongs_to :terminus_model,
              class_name: "Model",
