@@ -18,6 +18,10 @@ RSpec.describe Model, type: :model do
 
     describe "InDirect Associations" do
 
+    it { should have_many(:direct_origin_models) }
+
+    it { should have_many(:direct_terminus_models) }
+
     end
 
     describe "Validations" do
