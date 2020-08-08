@@ -146,12 +146,17 @@ class Association < ApplicationRecord
 
   default_scope { complete }
 
+  before_validation :foreign_key
   before_validation :normalize_name
 
   after_validation :set_complete
 
   def to_s
     name
+  end
+
+  def normalize_name
+    self.foreign_key = self.foreign_key.try(:parameterize, separator: "_")
   end
 
   def normalize_name

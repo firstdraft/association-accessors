@@ -114,7 +114,7 @@
             <% end %>
 
             <%= f.label :name %>
-            <%= f.text_field :name, class: name_class, placeholder: "Enter name", value: @association.terminus_model.name.underscore.pluralize %>
+            <%= f.text_field :name, class: name_class, placeholder: "Enter name", value: @association.terminus_model.plural_name %>
             <% if name_was_invalid %>
               <% @association.errors.full_messages_for(:name).each do |message| %>
                 <div class="invalid-feedback d-flex">
