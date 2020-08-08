@@ -32,7 +32,7 @@ class Association < ApplicationRecord
   enum nature: { 'direct' => 0, 'indirect' => 1 }
 
   cattr_accessor :form_steps do
-    %w[origin_model terminus_model nature foreign_key through source name]
+    %w[origin_model terminus_model nature foreign_key foreign_key_location through source name]
   end
 
   attr_accessor :form_step
@@ -40,6 +40,11 @@ class Association < ApplicationRecord
   # Direct associations
 
   belongs_to :idea, counter_cache: true
+
+  belongs_to :foreign_key_location_model,
+             class_name: 'Model',
+             counter_cache: :foreign_key_locations_count,
+             optional: true
 
   belongs_to :through_association,
              class_name: 'Association',

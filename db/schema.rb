@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_08_200448) do
+ActiveRecord::Schema.define(version: 2020_08_08_201652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_08_08_200448) do
     t.string "class_name"
     t.string "singular_name"
     t.string "plural_name"
+    t.integer "foreign_key_locations_count", default: 0
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|

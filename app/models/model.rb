@@ -6,6 +6,7 @@
 #  class_name                              :string
 #  direct_originating_associations_count   :integer
 #  direct_terminating_associations_count   :integer
+#  foreign_key_locations_count             :integer          default(0)
 #  indirect_originating_associations_count :integer
 #  indirect_terminating_associations_count :integer
 #  name                                    :string
