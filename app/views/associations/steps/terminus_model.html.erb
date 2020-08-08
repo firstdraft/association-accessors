@@ -22,7 +22,7 @@
             <% end %>
 
             <%= f.label :origin_model_id %>
-            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, {}, class: "form-control", disabled: true %>
+            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, { prompt: "Which class would you like to add an association accessor method to?" }, class: "form-control", disabled: true %>
             <% if origin_model_id_was_invalid %>
               <% @association.errors.full_messages_for(:origin_model_id).each do |message| %>
                 <div class="invalid-feedback d-flex">
@@ -45,7 +45,7 @@
             <% end %>
 
             <%= f.label :terminus_model_id %>
-            <%= f.collection_select :terminus_model_id, Model.all, :id, :to_s, {}, class: "form-control" %>
+            <%= f.collection_select :terminus_model_id, Model.all, :id, :plural_name, { prompt: "Which table do you want the method to return an associated record(s) from?" }, class: "form-control" %>
             <% if terminus_model_id_was_invalid %>
               <% @association.errors.full_messages_for(:terminus_model_id).each do |message| %>
                 <div class="invalid-feedback d-flex">
