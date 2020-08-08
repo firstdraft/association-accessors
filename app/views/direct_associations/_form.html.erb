@@ -1,0 +1,109 @@
+<% was_validated = direct_association.errors.any? %>
+
+<%= form_with(model: direct_association, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <!-- Label and input for foreign_key start -->
+  <div class="form-group">
+    <% foreign_key_class = "form-control" %>
+    <% foreign_key_was_invalid = direct_association.errors.include?(:foreign_key) %>
+
+    <% if was_validated %>
+      <% if foreign_key_was_invalid %>
+        <% foreign_key_class << " is-invalid" %>
+      <% else %>
+        <% foreign_key_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :foreign_key %>
+    <!-- Input for foreign_key start -->
+    <%= f.text_field :foreign_key, class: foreign_key_class, placeholder: "Enter foreign key" %>
+    <!-- Input for foreign_key end -->
+    <% if foreign_key_was_invalid %>
+      <% direct_association.errors.full_messages_for(:foreign_key).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for foreign_key end -->
+  <!-- Label and input for name start -->
+  <div class="form-group">
+    <% name_class = "form-control" %>
+    <% name_was_invalid = direct_association.errors.include?(:name) %>
+
+    <% if was_validated %>
+      <% if name_was_invalid %>
+        <% name_class << " is-invalid" %>
+      <% else %>
+        <% name_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :name %>
+    <!-- Input for name start -->
+    <%= f.text_field :name, class: name_class, placeholder: "Enter name" %>
+    <!-- Input for name end -->
+    <% if name_was_invalid %>
+      <% direct_association.errors.full_messages_for(:name).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for name end -->
+  <!-- Label and input for origin_model_id start -->
+  <div class="form-group">
+    <% origin_model_id_class = "form-control" %>
+    <% origin_model_id_was_invalid = direct_association.errors.include?(:origin_model_id) %>
+
+    <% if was_validated %>
+      <% if origin_model_id_was_invalid %>
+        <% origin_model_id_class << " is-invalid" %>
+      <% else %>
+        <% origin_model_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :origin_model_id %>
+    <!-- Input for origin_model_id start -->
+    <%= f.number_field :origin_model_id, class: origin_model_id_class, placeholder: "Enter origin model" %>
+    <!-- Input for origin_model_id end -->
+    <% if origin_model_id_was_invalid %>
+      <% direct_association.errors.full_messages_for(:origin_model_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for origin_model_id end -->
+  <!-- Label and input for terminus_model_id start -->
+  <div class="form-group">
+    <% terminus_model_id_class = "form-control" %>
+    <% terminus_model_id_was_invalid = direct_association.errors.include?(:terminus_model_id) %>
+
+    <% if was_validated %>
+      <% if terminus_model_id_was_invalid %>
+        <% terminus_model_id_class << " is-invalid" %>
+      <% else %>
+        <% terminus_model_id_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :terminus_model_id %>
+    <!-- Input for terminus_model_id start -->
+    <%= f.number_field :terminus_model_id, class: terminus_model_id_class, placeholder: "Enter terminus model" %>
+    <!-- Input for terminus_model_id end -->
+    <% if terminus_model_id_was_invalid %>
+      <% direct_association.errors.full_messages_for(:terminus_model_id).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for terminus_model_id end -->
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>
