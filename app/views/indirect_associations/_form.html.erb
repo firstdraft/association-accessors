@@ -172,7 +172,7 @@
 
     <%= f.label :terminus_model_id %>
     <!-- Input for terminus_model_id start -->
-    <%= f.number_field :terminus_model_id, class: terminus_model_id_class, placeholder: "Enter terminus model" %>
+    <%= f.select :terminus_model_id, options_from_collection_for_select(Model.all, :id, :to_s, @indirect_association.terminus_model_id), {}, class: "form-control" %>
     <!-- Input for terminus_model_id end -->
     <% if terminus_model_id_was_invalid %>
       <% indirect_association.errors.full_messages_for(:terminus_model_id).each do |message| %>
