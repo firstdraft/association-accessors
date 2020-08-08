@@ -3,7 +3,8 @@ class IndirectAssociationsController < ApplicationController
 
   # GET /indirect_associations
   def index
-    @indirect_associations = IndirectAssociation.page(params[:page]).per(10)
+    @q = IndirectAssociation.ransack(params[:q])
+    @indirect_associations = @q.result(:distinct => true).includes(:origin_model, :terminus_model).page(params[:page]).per(10)
   end
 
   # GET /indirect_associations/1

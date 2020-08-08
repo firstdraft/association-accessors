@@ -3,7 +3,8 @@ class ModelsController < ApplicationController
 
   # GET /models
   def index
-    @models = Model.page(params[:page]).per(10)
+    @q = Model.ransack(params[:q])
+    @models = @q.result(:distinct => true).includes(:originating_direct_associations, :terminating_direct_associations, :originating_indirect_associations, :terminating_indirect_associations, :idea, :direct_terminus_models, :direct_origin_models).page(params[:page]).per(10)
   end
 
   # GET /models/1

@@ -3,7 +3,8 @@ class DirectAssociationsController < ApplicationController
 
   # GET /direct_associations
   def index
-    @direct_associations = DirectAssociation.page(params[:page]).per(10)
+    @q = DirectAssociation.ransack(params[:q])
+    @direct_associations = @q.result(:distinct => true).includes(:origin_model, :terminus_model).page(params[:page]).per(10)
   end
 
   # GET /direct_associations/1

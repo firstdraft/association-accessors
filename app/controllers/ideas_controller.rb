@@ -5,7 +5,8 @@ class IdeasController < ApplicationController
 
   # GET /ideas
   def index
-    @ideas = Idea.page(params[:page]).per(10)
+    @q = Idea.ransack(params[:q])
+    @ideas = @q.result(:distinct => true).includes(:user, :models).page(params[:page]).per(10)
   end
 
   # GET /ideas/1
