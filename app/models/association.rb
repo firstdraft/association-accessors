@@ -78,10 +78,6 @@ class Association < ApplicationRecord
 
   # Scopes
 
-  scope :direct, -> { where(nature: [:direct]) }
-
-  scope :indirect, -> { where(nature: [:indirect]) }
-
   def to_s
     name
   end
