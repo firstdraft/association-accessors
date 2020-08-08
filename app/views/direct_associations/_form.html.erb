@@ -68,7 +68,7 @@
 
     <%= f.label :origin_model_id %>
     <!-- Input for origin_model_id start -->
-    <%= f.number_field :origin_model_id, class: origin_model_id_class, placeholder: "Enter origin model" %>
+    <%= f.select :origin_model_id, options_from_collection_for_select(Model.all, :id, :to_s, @direct_association.origin_model_id), {}, class: "form-control" %>
     <!-- Input for origin_model_id end -->
     <% if origin_model_id_was_invalid %>
       <% direct_association.errors.full_messages_for(:origin_model_id).each do |message| %>
