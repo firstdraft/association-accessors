@@ -4,6 +4,8 @@ RSpec.describe DirectAssociation, type: :model do
   
     describe "Direct Associations" do
 
+    it { should belong_to(:origin_model) }
+
     end
 
     describe "InDirect Associations" do
