@@ -1,24 +1,19 @@
 class DirectAssociationsController < ApplicationController
   before_action :set_direct_association, only: %i[show edit update destroy]
 
-  # GET /direct_associations
   def index
     @q = DirectAssociation.ransack(params[:q])
     @direct_associations = @q.result(distinct: true).includes(:origin_model, :terminus_model).page(params[:page]).per(10)
   end
 
-  # GET /direct_associations/1
   def show; end
 
-  # GET /direct_associations/new
   def new
     @direct_association = DirectAssociation.new
   end
 
-  # GET /direct_associations/1/edit
   def edit; end
 
-  # POST /direct_associations
   def create
     @direct_association = DirectAssociation.new(direct_association_params)
 
@@ -34,7 +29,6 @@ class DirectAssociationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /direct_associations/1
   def update
     if @direct_association.update(direct_association_params)
       redirect_to @direct_association, notice: "Direct association was successfully updated."
@@ -43,7 +37,6 @@ class DirectAssociationsController < ApplicationController
     end
   end
 
-  # DELETE /direct_associations/1
   def destroy
     @direct_association.destroy
     message = "DirectAssociation was successfully deleted."
@@ -56,12 +49,10 @@ class DirectAssociationsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_direct_association
     @direct_association = DirectAssociation.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def direct_association_params
     params.require(:direct_association).permit(:foreign_key, :name, :origin_model_id, :terminus_model_id)
   end

@@ -3,26 +3,21 @@ class IdeasController < ApplicationController
 
   before_action :set_idea, only: %i[show edit update destroy]
 
-  # GET /ideas
   def index
     @q = Idea.ransack(params[:q])
     @ideas = @q.result(distinct: true).includes(:user, :models).page(params[:page]).per(10)
   end
 
-  # GET /ideas/1
   def show
     @model = Model.new
   end
 
-  # GET /ideas/new
   def new
     @idea = Idea.new
   end
 
-  # GET /ideas/1/edit
   def edit; end
 
-  # POST /ideas
   def create
     @idea = Idea.new(idea_params)
 
@@ -38,7 +33,6 @@ class IdeasController < ApplicationController
     end
   end
 
-  # PATCH/PUT /ideas/1
   def update
     if @idea.update(idea_params)
       redirect_to @idea, notice: "Idea was successfully updated."
@@ -47,7 +41,6 @@ class IdeasController < ApplicationController
     end
   end
 
-  # DELETE /ideas/1
   def destroy
     @idea.destroy
     message = "Idea was successfully deleted."
@@ -67,12 +60,10 @@ class IdeasController < ApplicationController
     end
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_idea
     @idea = Idea.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def idea_params
     params.require(:idea).permit(:name, :user_id)
   end
