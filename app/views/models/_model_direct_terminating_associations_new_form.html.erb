@@ -16,19 +16,19 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :origin_model_id %>
+    <%= f.label :origin_model_id, "Which class would you like to add an association accessor method to?" %>
     <%= f.text_field :origin_model_id, class: "form-control" %>
   </div>
 
   <%= f.hidden_field :terminus_model_id, value: @model.id %>
 
   <div class="form-group">
-    <%= f.label :foreign_key %>
+    <%= f.label :foreign_key, "What is the foreign key column called?" %>
     <%= f.text_field :foreign_key, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :nature %>
+    <%= f.label :nature, "For this relationship, how is a row in the #{@association.origin_model.plural_name} table connected to a row in the #{@association.terminus_model.plural_name} table?" %>
     <%= f.select :nature, options_for_select(Association.natures.keys), {}, class: "form-control" %>
   </div>
 

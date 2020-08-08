@@ -1,47 +1,64 @@
+# == Schema Information
+#
+# Table name: models
+#
+#  id                                      :bigint           not null, primary key
+#  class_name                              :string
+#  direct_originating_associations_count   :integer          default(0)
+#  direct_terminating_associations_count   :integer          default(0)
+#  foreign_key_locations_count             :integer          default(0)
+#  indirect_originating_associations_count :integer          default(0)
+#  indirect_terminating_associations_count :integer          default(0)
+#  join_models_count                       :integer          default(0)
+#  name                                    :string
+#  originating_associations_count          :integer          default(0)
+#  plural_name                             :string
+#  singular_name                           :string
+#  terminating_associations_count          :integer          default(0)
+#  created_at                              :datetime         not null
+#  updated_at                              :datetime         not null
+#  idea_id                                 :integer
+#
 class Model < ApplicationRecord
   # Direct associations
 
   belongs_to :idea
 
   has_many   :indirect_terminating_associations,
-             class_name: "Association",
-             foreign_key: "terminus_model_id",
+             -> { indirect },
+             class_name: 'Association',
+             foreign_key: 'terminus_model_id',
              dependent: :destroy
 
   has_many   :indirect_originating_associations,
-             class_name: "Association",
-             foreign_key: "origin_model_id",
+             -> { indirect },
+             class_name: 'Association',
+             foreign_key: 'origin_model_id',
              dependent: :destroy
 
   has_many   :direct_terminating_associations,
-             class_name: "Association",
-             foreign_key: "terminus_model_id",
+             -> { direct },
+             class_name: 'Association',
+             foreign_key: 'terminus_model_id',
              dependent: :destroy
 
   has_many   :direct_originating_associations,
-             class_name: "Association",
-             foreign_key: "origin_model_id",
+             -> { direct },
+             class_name: 'Association',
+             foreign_key: 'origin_model_id',
              dependent: :destroy
 
   has_many   :terminating_associations,
-             class_name: "Association",
-             foreign_key: "terminus_model_id",
+             class_name: 'Association',
+             foreign_key: 'terminus_model_id',
              dependent: :destroy
 
   has_many   :originating_associations,
-             class_name: "Association",
-             foreign_key: "origin_model_id",
+             class_name: 'Association',
+             foreign_key: 'origin_model_id',
              dependent: :destroy
 
   # Indirect associations
-
-  has_many   :terminating_associations,
-             through: :terminating_associations,
-             source: :origin_model
-
-  has_many   :terminus_models,
-             through: :originating_associations,
-             source: :terminus_model
 
   has_many   :indirect_origin_models,
              through: :indirect_terminating_associations,
@@ -53,9 +70,19 @@ class Model < ApplicationRecord
 
   # Validations
 
+  validates :class_name, presence: true, uniqueness: { scope: :idea_id }
+
   # Scopes
 
+  before_validation :normalize_name
+
+  def normalize_name
+    self.plural_name = name.pluralize.parameterize(separator: '_')
+    self.singular_name = plural_name.singularize
+    self.class_name = singular_name.classify
+  end
+
   def to_s
-    name
+    class_name
   end
 end

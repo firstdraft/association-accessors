@@ -20,12 +20,9 @@ class ModelsController < ApplicationController
     @model = Model.new(model_params)
 
     if @model.save
-      message = "Model was successfully created."
-      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-        redirect_back fallback_location: request.referer, notice: message
-      else
-        redirect_to @model, notice: message
-      end
+      message = 'Model was successfully created.'
+
+      redirect_to @model.idea, notice: message
     else
       render :new
     end
@@ -33,7 +30,7 @@ class ModelsController < ApplicationController
 
   def update
     if @model.update(model_params)
-      redirect_to @model, notice: "Model was successfully updated."
+      redirect_to @model, notice: 'Model was successfully updated.'
     else
       render :edit
     end
@@ -41,9 +38,9 @@ class ModelsController < ApplicationController
 
   def destroy
     @model.destroy
-    message = "Model was successfully deleted."
+    message = 'Model was successfully deleted.'
     if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-      redirect_back fallback_location: request.referer, notice: message
+      redirect_back fallback_location: @model.idea, notice: message
     else
       redirect_to models_url, notice: message
     end

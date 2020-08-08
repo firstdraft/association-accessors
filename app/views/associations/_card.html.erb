@@ -1,41 +1,13 @@
 <div class="card mb-3">
   <h2 class="card-header h4">
-    Association #<%= association.id %>
+    Association details
   </h2>
 
   <div class="card-body">
-    <dl class="mb-1">
-      <dt>Name</dt>
-      <dd><%= association.name %></dd>
-
-      <dt>Source association</dt>
-      <dd><%= association.source_association_id %></dd>
-
-      <dt>Through association</dt>
-      <dd><%= association.through_association_id %></dd>
-
-      <dt>Origin model</dt>
-      <dd><%= association.origin_model_id %></dd>
-
-      <dt>Terminus model</dt>
-      <dd><%= association.terminus_model_id %></dd>
-
-      <dt>Foreign key</dt>
-      <dd><%= association.foreign_key %></dd>
-
-      <dt>Nature</dt>
-      <dd><%= association.nature %></dd>
-
-    </dl>
-
-    <div class="row">
+    <div class="row mb-3">
       <div class="col">
-        <%= link_to_show_or_back association, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
-      </div>
-
-      <div class="col">
-        <%= link_to edit_association_url(association), class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-edit"></i>
+        <%= link_to @association.idea, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-chevron-left"></i>
         <% end %>
       </div>
 
@@ -45,9 +17,31 @@
         <% end %>
       </div>
     </div>
-  </div>
 
-  <div class="card-footer text-muted">
-    Last updated <%= time_ago_in_words(association.updated_at) %> ago
+    <dl class="mb-1">
+      <dt>Name</dt>
+      <dd><%= association.name %></dd>
+
+      <dt>Starts at</dt>
+      <dd><%= association.origin_model %></dd>
+
+      <dt>Ends at</dt>
+      <dd><%= association.terminus_model %></dd>
+
+      <dt>Nature</dt>
+      <dd><%= association.nature %></dd>
+
+      <% if association.direct? %>
+        <dt>Foreign key</dt>
+        <dd><%= association.foreign_key %></dd>
+
+      <% elsif association.indirect? %>
+        <dt>Through association</dt>
+        <dd><%= link_to association.through_association, association.through_association %></dd>
+
+        <dt>Source association</dt>
+        <dd><%= link_to association.source_association, association.source_association %></dd>
+      <% end %>
+    </dl>
   </div>
 </div>

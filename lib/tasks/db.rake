@@ -1,5 +1,5 @@
 namespace :db do
-  desc "Erase all tables"
+  desc 'Erase all tables'
   task clear: :environment do
     connection = ActiveRecord::Base.connection
     tables = connection.tables

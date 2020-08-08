@@ -1,11 +1,33 @@
-<div class="row justify-content-center mb-3">
-  <div class="col-md-8">
+<div class="row mb-3">
+  <div class="col-md-3">
     <%= render object: @idea, partial: "card", as: :idea %>
+
+     <%= render partial: "ideas/idea_models" %>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card mb-3">
+      <div class="card-body">
+        <dl class="mb-4">
+          <dt class="mb-3">Let's build a new association accessor!</dt>
+          <dd><%= button_to 'Start wizard', associations_path(association: { idea_id: @idea }), method: :post, class: "btn btn-block btn-success" %></dd>
+
+        </dl>
+      </div>
+    </div>
+
+    <%= render partial: "ideas/idea_associations" %>
   </div>
 </div>
 
-<div class="row justify-content-center mb-3">
+<div class="row mb-3">
   <div class="col-md-8">
-    <%= render partial: "ideas/idea_models" %>
+    
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-8">
+    
   </div>
 </div>

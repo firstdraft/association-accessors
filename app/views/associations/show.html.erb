@@ -1,101 +1,95 @@
-<div class="row justify-content-center mb-3">
-  <div class="col-md-8">
+<div class="row mb-3">
+  <div class="col-md-3">
     <%= render object: @association, partial: "card", as: :association %>
   </div>
-</div>
 
-<div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_source" %>
+    <div class="card">
+      <div class="card-body">
+      <% if @association.direct_one? %>
+<%= render "direct_long_belongs_to", language: :ruby %>
+      <% elsif @association.direct_many? %>
+<%= render "direct_long_has_many" %>
+      <% elsif @association.indirect_many_one? %>
+<%= render "indirect_long_many_one" %>
+      <% elsif @association.indirect_many_many? %>
+<%= render "indirect_long_many_many" %>
+      <% elsif @association.indirect_one_one? %>
+<%= render "indirect_long_one_one" %>
+      <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_through" %>
+    <%#= render partial: "associations/association_indirect_associations_as_source" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_source" %>
+    <%#= render partial: "associations/association_indirect_associations_as_source" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_through" %>
+    <%#= render partial: "associations/association_indirect_associations_as_through" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_source" %>
+    <%#= render partial: "associations/association_indirect_associations_as_through" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_source" %>
+    <%#= render partial: "associations/association_indirect_associations_as_source" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_through" %>
+    <%#= render partial: "associations/association_indirect_associations_as_source" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_through" %>
+    <%#= render partial: "associations/association_indirect_associations_as_source" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_source" %>
+    <%#= render partial: "associations/association_indirect_associations_as_source" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_source" %>
+    <%#= render partial: "associations/association_indirect_associations_as_through" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_source" %>
+    <%#= render partial: "associations/association_indirect_associations_as_through" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_source" %>
+    <%#= render partial: "associations/association_indirect_associations_as_through" %>
   </div>
 </div>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_through" %>
-  </div>
-</div>
-
-<div class="row justify-content-center mb-3">
-  <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_through" %>
-  </div>
-</div>
-
-<div class="row justify-content-center mb-3">
-  <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_through" %>
-  </div>
-</div>
-
-<div class="row justify-content-center mb-3">
-  <div class="col-md-8">
-    <%= render partial: "associations/association_indirect_associations_as_through" %>
+    <%#= render partial: "associations/association_indirect_associations_as_through" %>
   </div>
 </div>

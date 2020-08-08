@@ -1,0 +1,122 @@
+<div class="row justify-content-center mb-3">
+  <div class="col-md-8">
+    <div class="card">
+      <h2 class="card-header h4">
+        <%= step.titleize %>
+      </h2>
+
+      <div class="card-body">
+        <% was_validated = @association.errors.any? %>
+
+        <%= form_with(model: @association, url: wizard_path, local: true, novalidate: true, class: "mb-3") do |f| %>
+          <div class="form-group">
+            <% origin_model_id_class = "form-control" %>
+            <% origin_model_id_was_invalid = @association.errors.include?(:origin_model) %>
+
+            <% if was_validated %>
+              <% if origin_model_id_was_invalid %>
+                <% origin_model_id_class << " is-invalid" %>
+              <% else %>
+                <% origin_model_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :origin_model_id, "Which class would you like to add an association accessor method to?" %>
+            <%= f.collection_select :origin_model_id, @association.idea.models.order(:class_name), :id, :class_name, {}, class: origin_model_id_class, disabled: true %>
+            <% if origin_model_id_was_invalid %>
+              <% @association.errors.full_messages_for(:origin_model).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <% terminus_model_id_class = "form-control" %>
+            <% terminus_model_id_was_invalid = @association.errors.include?(:terminus_model) %>
+
+            <% if was_validated %>
+              <% if terminus_model_id_was_invalid %>
+                <% terminus_model_id_class << " is-invalid" %>
+              <% else %>
+                <% terminus_model_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :terminus_model_id, "Which table do you want the method to return an associated record(s) from?" %>
+            <%= f.collection_select :terminus_model_id, @association.idea.models.order(:plural_name), :id, :plural_name, { prompt: "Please select from one of your existing models, or go create a new one." }, class: terminus_model_id_class, disabled: true %>
+            <% if terminus_model_id_was_invalid %>
+              <% @association.errors.full_messages_for(:terminus_model_id).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <% nature_class = "form-control" %>
+            <% nature_was_invalid = @association.errors.include?(:nature) %>
+
+            <% if was_validated %>
+              <% if nature_was_invalid %>
+                <% nature_class << " is-invalid" %>
+              <% else %>
+                <% nature_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :nature, "For this relationship, how is a row in the #{@association.origin_model.plural_name} table connected to a row in the #{@association.terminus_model.plural_name} table?" %>
+            <%= f.collection_select :nature, @association.options_for_nature_select, :first, :last, { prompt: "Directly or indirectly?" }, class: nature_class, disabled: true %>
+            <% if nature_was_invalid %>
+              <% @association.errors.full_messages_for(:nature).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <% foreign_key_location_model_id_class = "custom-control-input" %>
+            <% foreign_key_location_model_id_was_invalid = @association.errors.include?(:foreign_key_location_model) %>
+
+            <% if was_validated %>
+              <% if foreign_key_location_model_id_was_invalid %>
+                <% foreign_key_location_model_id_class << " is-invalid" %>
+              <% else %>
+                <% foreign_key_location_model_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <label>In which table is the foreign key column located?</label>
+            <div class="custom-control custom-radio">
+              <%= f.radio_button :foreign_key_location_model_id, @association.origin_model_id, class: foreign_key_location_model_id_class %>
+              <%= f.label :foreign_key_location_model_id, @association.origin_model.plural_name.humanize.downcase, value: @association.origin_model_id, class:"custom-control-label" %>
+            </div>
+
+            <div class="custom-control custom-radio">
+              <%= f.radio_button :foreign_key_location_model_id, @association.terminus_model_id, class: foreign_key_location_model_id_class %>
+              <%= f.label :foreign_key_location_model_id, @association.terminus_model.plural_name.humanize.downcase, value: @association.terminus_model_id, class:"custom-control-label" %>
+            </div>
+
+            <% if nature_was_invalid %>
+              <% @association.errors.full_messages_for(:foreign_key_location_model).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <%= f.button "Next step", class: "btn btn-outline-secondary btn-block" %>
+        <% end %>
+
+        <%= link_to @association.idea, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-redo fa-fw"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

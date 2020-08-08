@@ -1,5 +1,5 @@
 {
-  "name": "association_builder",
+  "name": "association_accessors",
   "scripts": {
     "postdeploy": "bundle exec rails db:migrate && bundle exec rails db:seed && bundle exec rails dev:prime"
   },

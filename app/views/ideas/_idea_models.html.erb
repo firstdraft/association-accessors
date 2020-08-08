@@ -1,16 +1,13 @@
 <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
     Models
-
-    <a data-toggle="collapse" href="#idea_models_new_form">
-      Add model
-    </a>
   </div>
 
   <ul class="list-group list-group-flush">
     <% @idea.models.each do |model| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
-        <%= link_to model.to_s, model_path(model) %>
+        <%#= link_to model.to_s, model_path(model) %>
+        <code><%= model %></code>
 
         <%= link_to model, method: :delete, data: { confirm: "Do you really want to delete this model" } do %>
           <i class="fas fa-trash-alt"></i>
@@ -20,7 +17,7 @@
     <% end %>
 
     <div class="card-footer">
-      <div class="collapse" id="idea_models_new_form">
+      <div id="idea_models_new_form">
         <%= render partial: "ideas/idea_models_new_form" %>
       </div>
     </div>

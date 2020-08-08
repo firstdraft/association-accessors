@@ -53,7 +53,7 @@ module JsonapiRendererDocument
       else
         data_set.add?(
           [primary[:relationships][include_name][:data][:type],
-           primary[:relationships][include_name][:data][:id]],
+           primary[:relationships][include_name][:data][:id]]
         )
       end
 
