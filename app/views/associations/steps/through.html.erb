@@ -34,7 +34,7 @@
 
           <div class="form-group">
             <% terminus_model_id_class = "form-control" %>
-            <% terminus_model_id_was_invalid = @association.errors.include?(:terminus_model_id) %>
+            <% terminus_model_id_was_invalid = @association.errors.include?(:terminus_model) %>
 
             <% if was_validated %>
               <% if terminus_model_id_was_invalid %>
@@ -45,7 +45,7 @@
             <% end %>
 
             <%= f.label :terminus_model_id, "Which table do you want the method to return an associated record(s) from?" %>
-            <%= f.collection_select :terminus_model_id, Model.all, :id, :plural_name, { prompt: "Please select from one of your existing models, or go create a new one." }, class: "form-control", disabled: true %>
+            <%= f.collection_select :terminus_model_id, Model.all, :id, :plural_name, { prompt: "Please select from one of your existing models, or go create a new one." }, class: terminus_model_id_class, disabled: true %>
             <% if terminus_model_id_was_invalid %>
               <% @association.errors.full_messages_for(:terminus_model_id).each do |message| %>
                 <div class="invalid-feedback d-flex">
