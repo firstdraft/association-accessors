@@ -11,7 +11,7 @@
         <%= form_with(model: @association, url: wizard_path, local: true, novalidate: true, class: "mb-3") do |f| %>
           <div class="form-group">
             <% origin_model_id_class = "form-control" %>
-            <% origin_model_id_was_invalid = @association.errors.include?(:origin_model_id) %>
+            <% origin_model_id_was_invalid = @association.errors.include?(:origin_model) %>
 
             <% if was_validated %>
               <% if origin_model_id_was_invalid %>
@@ -22,9 +22,9 @@
             <% end %>
 
             <%= f.label :origin_model_id, "Which class would you like to add an association accessor method to?" %>
-            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, {}, class: "form-control", disabled: true %>
+            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, {}, class: origin_model_id_class, disabled: true %>
             <% if origin_model_id_was_invalid %>
-              <% @association.errors.full_messages_for(:origin_model_id).each do |message| %>
+              <% @association.errors.full_messages_for(:origin_model).each do |message| %>
                 <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
