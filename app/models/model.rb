@@ -4,21 +4,25 @@ class Model < ApplicationRecord
   belongs_to :idea
 
   has_many   :indirect_terminating_associations,
+             -> { indirect },
              class_name: "Association",
              foreign_key: "terminus_model_id",
              dependent: :destroy
 
   has_many   :indirect_originating_associations,
+             -> { indirect },
              class_name: "Association",
              foreign_key: "origin_model_id",
              dependent: :destroy
 
   has_many   :direct_terminating_associations,
+             -> { direct },
              class_name: "Association",
              foreign_key: "terminus_model_id",
              dependent: :destroy
 
   has_many   :direct_originating_associations,
+             -> { direct },
              class_name: "Association",
              foreign_key: "origin_model_id",
              dependent: :destroy
@@ -34,14 +38,6 @@ class Model < ApplicationRecord
              dependent: :destroy
 
   # Indirect associations
-
-  has_many   :terminating_associations,
-             through: :terminating_associations,
-             source: :origin_model
-
-  has_many   :terminus_models,
-             through: :originating_associations,
-             source: :terminus_model
 
   has_many   :indirect_origin_models,
              through: :indirect_terminating_associations,
