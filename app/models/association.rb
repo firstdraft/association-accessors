@@ -180,4 +180,12 @@ class Association < ApplicationRecord
   def set_complete
     self.complete = true if name.present?
   end
+
+  def options_for_nature_select
+    [
+      ['direct', "Directly: the ID of the #{origin_model.singular_name} is stored in some column of the #{terminus_model.singular_name}, or the ID of the #{terminus_model.singular_name} is stored in the #{origin_model.singular_name}."],
+      ['indirect', "Indirectly: the #{origin_model.singular_name} and the #{terminus_model.singular_name} both have an association to a third, joining, record."]
+    ]
+  end
+  
 end
