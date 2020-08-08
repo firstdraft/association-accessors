@@ -48,23 +48,33 @@
 
 
   <div class="form-group">
-    <%= f.label :originating_direct_associations_foreign_key_cont, "DirectAssociation foreign_key contains" %>
-    <%= f.text_field :originating_direct_associations_foreign_key_cont, :class => "form-control", :placeholder => "DirectAssociation foreign_key contains" %>
+    <%= f.label :originating_associations_name_cont, "Association name contains" %>
+    <%= f.text_field :originating_associations_name_cont, :class => "form-control", :placeholder => "Association name contains" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :terminating_direct_associations_foreign_key_cont, "DirectAssociation foreign_key contains" %>
-    <%= f.text_field :terminating_direct_associations_foreign_key_cont, :class => "form-control", :placeholder => "DirectAssociation foreign_key contains" %>
+    <%= f.label :terminating_associations_name_cont, "Association name contains" %>
+    <%= f.text_field :terminating_associations_name_cont, :class => "form-control", :placeholder => "Association name contains" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :originating_indirect_associations_name_cont, "IndirectAssociation name contains" %>
-    <%= f.text_field :originating_indirect_associations_name_cont, :class => "form-control", :placeholder => "IndirectAssociation name contains" %>
+    <%= f.label :direct_originating_associations_name_cont, "Association name contains" %>
+    <%= f.text_field :direct_originating_associations_name_cont, :class => "form-control", :placeholder => "Association name contains" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :terminating_indirect_associations_name_cont, "IndirectAssociation name contains" %>
-    <%= f.text_field :terminating_indirect_associations_name_cont, :class => "form-control", :placeholder => "IndirectAssociation name contains" %>
+    <%= f.label :direct_terminating_associations_name_cont, "Association name contains" %>
+    <%= f.text_field :direct_terminating_associations_name_cont, :class => "form-control", :placeholder => "Association name contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :indirect_originating_associations_name_cont, "Association name contains" %>
+    <%= f.text_field :indirect_originating_associations_name_cont, :class => "form-control", :placeholder => "Association name contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :indirect_terminating_associations_name_cont, "Association name contains" %>
+    <%= f.text_field :indirect_terminating_associations_name_cont, :class => "form-control", :placeholder => "Association name contains" %>
   </div>
 
   <div class="form-group">
@@ -73,13 +83,23 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :direct_terminus_models_name_cont, "Model name contains" %>
-    <%= f.text_field :direct_terminus_models_name_cont, :class => "form-control", :placeholder => "Model name contains" %>
+    <%= f.label :indirect_terminus_models_name_cont, "Model name contains" %>
+    <%= f.text_field :indirect_terminus_models_name_cont, :class => "form-control", :placeholder => "Model name contains" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :direct_origin_models_name_cont, "Model name contains" %>
-    <%= f.text_field :direct_origin_models_name_cont, :class => "form-control", :placeholder => "Model name contains" %>
+    <%= f.label :indirect_origin_models_name_cont, "Model name contains" %>
+    <%= f.text_field :indirect_origin_models_name_cont, :class => "form-control", :placeholder => "Model name contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :terminus_models_name_cont, "Model name contains" %>
+    <%= f.text_field :terminus_models_name_cont, :class => "form-control", :placeholder => "Model name contains" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :terminating_associations_name_cont, "Model name contains" %>
+    <%= f.text_field :terminating_associations_name_cont, :class => "form-control", :placeholder => "Model name contains" %>
   </div>
 
 

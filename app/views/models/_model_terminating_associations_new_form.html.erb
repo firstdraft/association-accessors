@@ -1,0 +1,36 @@
+<%= form_with(model: @association, local: true) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :source_association_id %>
+    <%= f.select :source_association_id, options_from_collection_for_select(Association.all, :id, :to_s, @association.source_association_id), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :through_association_id %>
+    <%= f.select :through_association_id, options_from_collection_for_select(Association.all, :id, :to_s, @association.through_association_id), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :origin_model_id %>
+    <%= f.text_field :origin_model_id, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :terminus_model_id, value: @model.id %>
+
+  <div class="form-group">
+    <%= f.label :foreign_key %>
+    <%= f.text_field :foreign_key, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :nature %>
+    <%= f.select :nature, options_for_select(Association.natures.keys), {}, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Create association", class: "btn btn-block btn-outline-secondary" %>
+<% end %>
