@@ -15,7 +15,7 @@ class AssociationsController < ApplicationController
   def edit; end
 
   def create
-    @association = Association.new
+    @association = Association.new(association_params)
     @association.save(validate: false)
     redirect_to association_step_path(@association, Association.form_steps.first)
   end
@@ -45,6 +45,6 @@ class AssociationsController < ApplicationController
   end
 
   def association_params
-    params.require(:association).permit(:name, :source_association_id, :through_association_id, :origin_model_id, :terminus_model_id, :foreign_key, :nature)
+    params.require(:association).permit(:name, :source_association_id, :through_association_id, :origin_model_id, :terminus_model_id, :foreign_key, :nature, :idea_id)
   end
 end

@@ -92,40 +92,40 @@ class Association < ApplicationRecord
 
   # Indirect associations
 
-  
+
 
   # Validations
 
-  with_options if: -> { form_step == :origin_model } do |step|
+  with_options if: -> { form_step == "origin_model" } do |step|
     step.validates :origin_model, presence: true
   end
 
-  with_options if: -> { form_step == :terminus_model } do |step|
+  with_options if: -> { form_step == "terminus_model" } do |step|
     step.validates :origin_model, presence: true
     step.validates :terminus_model, presence: true
   end
 
-  with_options if: -> { form_step == :nature } do |step|
+  with_options if: -> { form_step == "nature" } do |step|
     step.validates :origin_model, presence: true
     step.validates :terminus_model, presence: true
     step.validates :nature, presence: true
   end
 
-  with_options if: -> { form_step == :foreign_key } do |step|
+  with_options if: -> { form_step == "foreign_key" } do |step|
     step.validates :origin_model, presence: true
     step.validates :terminus_model, presence: true
     step.validates :nature, presence: true
     step.validates :foreign_key, presence: true
   end
 
-  with_options if: -> { form_step == :through } do |step|
+  with_options if: -> { form_step == "through" } do |step|
     step.validates :origin_model, presence: true
     step.validates :terminus_model, presence: true
     step.validates :nature, presence: true
     step.validates :through_association, presence: true
   end
 
-  with_options if: -> { form_step == :source } do |step|
+  with_options if: -> { form_step == "source" } do |step|
     step.validates :origin_model, presence: true
     step.validates :terminus_model, presence: true
     step.validates :nature, presence: true

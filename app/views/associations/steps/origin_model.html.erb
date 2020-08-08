@@ -7,7 +7,6 @@
 
       <div class="card-body">
         <% was_validated = @association.errors.any? %>
-        <%= @association.errors.full_messages %>
 
         <%= form_with(model: @association, url: wizard_path, local: true, novalidate: true, class: "mb-3") do |f| %>
           <div class="form-group">
@@ -23,7 +22,7 @@
             <% end %>
 
             <%= f.label :origin_model_id %>
-            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, {}, class: "form-control" %>
+            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, { prompt: "Which class would you like to add an association accessor method to?" }, class: "form-control" %>
             <% if origin_model_id_was_invalid %>
               <% @association.errors.full_messages_for(:origin_model_id).each do |message| %>
                 <div class="invalid-feedback d-flex">

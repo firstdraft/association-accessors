@@ -12,7 +12,7 @@
       <dd><%= idea.user_id %></dd>
 
       <dt>Build association</dt>
-      <dd><%= link_to 'Start wizard', associations_path, method: :post %></dd>
+      <dd><%= button_to 'Start wizard', associations_path(association: { idea_id: @idea }), method: :post, class: "btn btn-block btn-outline-success" %></dd>
 
     </dl>
 
