@@ -68,7 +68,7 @@
             <% end %>
 
             <%= f.label :nature, "In this association, how is a row in the #{@association.origin_model.plural_name} table related to a row in the #{@association.terminus_model.plural_name} table?" %>
-            <%= f.collection_select :nature, @association.options_for_nature_select, :first, :last, { prompt: "Directly or indirectly?" }, class: nature_class %>
+            <%= f.collection_select :nature, @association.options_for_nature_select, :first, :last, { prompt: "Directly or indirectly?" }, class: nature_class, disabled: true %>
             <% if nature_was_invalid %>
               <% @association.errors.full_messages_for(:nature).each do |message| %>
                 <div class="invalid-feedback d-flex">

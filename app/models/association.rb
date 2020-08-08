@@ -183,7 +183,7 @@ class Association < ApplicationRecord
 
   def options_for_nature_select
     [
-      ['direct', "Directly: the ID of the #{origin_model.singular_name} is stored in some column of the #{terminus_model.singular_name}, or the ID of the #{terminus_model.singular_name} is stored in the #{origin_model.singular_name}."],
+      ['direct', "Directly: the ID of the #{origin_model.singular_name} is stored in some column of the #{terminus_model.singular_name}, or vice versa."],
       ['indirect', "Indirectly: the #{origin_model.singular_name} and the #{terminus_model.singular_name} both have an association to a third, joining, record."]
     ]
   end
