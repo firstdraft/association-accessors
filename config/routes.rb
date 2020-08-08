@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   scope path: ApplicationResource.endpoint_namespace, defaults: { format: :jsonapi } do
     scope module: 'api/v1', as: 'api' do
+      resources :ideas
+
       resources :indirect_associations
 
       resources :direct_associations
