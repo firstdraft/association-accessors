@@ -17,11 +17,9 @@ Rails.application.routes.draw do
   end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root to: "models#index"
+  root to: "ideas#index"
   resources :ideas
-  resources :associations
+  resources :associations, except: :index
   devise_for :users
-  resources :users
-  resources :models
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :models, except: :index
 end
