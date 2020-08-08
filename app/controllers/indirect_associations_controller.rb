@@ -42,8 +42,14 @@ class IndirectAssociationsController < ApplicationController
   # DELETE /indirect_associations/1
   def destroy
     @indirect_association.destroy
-    redirect_to indirect_associations_url, notice: 'Indirect association was successfully destroyed.'
+    message = "IndirectAssociation was successfully deleted."
+    if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+      redirect_back fallback_location: request.referrer, notice: message
+    else
+      redirect_to indirect_associations_url, notice: message
+    end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

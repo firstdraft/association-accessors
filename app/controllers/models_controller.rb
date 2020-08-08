@@ -42,8 +42,14 @@ class ModelsController < ApplicationController
   # DELETE /models/1
   def destroy
     @model.destroy
-    redirect_to models_url, notice: 'Model was successfully destroyed.'
+    message = "Model was successfully deleted."
+    if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+      redirect_back fallback_location: request.referrer, notice: message
+    else
+      redirect_to models_url, notice: message
+    end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
