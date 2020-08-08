@@ -42,7 +42,7 @@
 
     <%= f.label :idea_id %>
     <!-- Input for idea_id start -->
-    <%= f.number_field :idea_id, class: idea_id_class, placeholder: "Enter idea" %>
+    <%= f.select :idea_id, options_from_collection_for_select(Idea.all, :id, :to_s, @model.idea_id), {}, class: "form-control" %>
     <!-- Input for idea_id end -->
     <% if idea_id_was_invalid %>
       <% model.errors.full_messages_for(:idea_id).each do |message| %>
