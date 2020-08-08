@@ -7,6 +7,8 @@ class IdeaResource < ApplicationResource
 
   # Direct associations
 
+  has_many   :models
+
   belongs_to :user
 
   # Indirect associations
