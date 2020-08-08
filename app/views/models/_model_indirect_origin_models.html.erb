@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Indirect Origin Models
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @model.indirect_origin_models.each do |model| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <a href="/models/<%= model.id %>">
+          <%= model.name %>
+        </a>
+
+      </li>
+    <% end %>
+
+  </ul>
+</div>

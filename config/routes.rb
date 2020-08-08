@@ -6,9 +6,7 @@ Rails.application.routes.draw do
 
       resources :ideas
 
-      resources :indirect_associations
-
-      resources :direct_associations
+      resources :associations
 
       resources :users
 
@@ -21,8 +19,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root to: "models#index"
   resources :ideas
-  resources :indirect_associations
-  resources :direct_associations
+  resources :associations
   devise_for :users
   resources :users
   resources :models

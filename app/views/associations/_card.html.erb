@@ -1,0 +1,53 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    Association #<%= association.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+      <dt>Name</dt>
+      <dd><%= association.name %></dd>
+
+      <dt>Source association</dt>
+      <dd><%= association.source_association_id %></dd>
+
+      <dt>Through association</dt>
+      <dd><%= association.through_association_id %></dd>
+
+      <dt>Origin model</dt>
+      <dd><%= association.origin_model_id %></dd>
+
+      <dt>Terminus model</dt>
+      <dd><%= association.terminus_model_id %></dd>
+
+      <dt>Foreign key</dt>
+      <dd><%= association.foreign_key %></dd>
+
+      <dt>Nature</dt>
+      <dd><%= association.nature %></dd>
+
+    </dl>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to_show_or_back association, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+
+      <div class="col">
+        <%= link_to edit_association_url(association), class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <%= link_to association, method: :delete, data: { confirm: "Do you really want to delete this association?" }, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%= time_ago_in_words(association.updated_at) %> ago
+  </div>
+</div>
