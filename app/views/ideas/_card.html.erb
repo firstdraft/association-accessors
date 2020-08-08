@@ -1,17 +1,11 @@
 <div class="card mb-3">
   <h2 class="card-header h4">
-    Idea #<%= idea.id %>
+    <%= idea.name %>
   </h2>
 
   <div class="card-body">
-    <dl class="mb-1">
-      <dt>Name</dt>
-      <dd><%= idea.name %></dd>
-
-      <dt>User</dt>
-      <dd><%= idea.user_id %></dd>
-
-      <dt>Build association</dt>
+    <dl class="mb-4">
+      <dt class="mb-3">Let's build a new association accessor!</dt>
       <dd><%= button_to 'Start wizard', associations_path(association: { idea_id: @idea }), method: :post, class: "btn btn-block btn-outline-success" %></dd>
 
     </dl>
