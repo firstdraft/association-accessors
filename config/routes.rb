@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   use_doorkeeper
   scope path: ApplicationResource.endpoint_namespace, defaults: { format: :jsonapi } do
-    scope module: "api/v1", as: "api" do
-      get "/current_user" => "users#show"
+    scope module: 'api/v1', as: 'api' do
+      get '/current_user' => 'users#show'
 
       resources :ideas
 
@@ -12,16 +12,16 @@ Rails.application.routes.draw do
 
       resources :models
     end
-    mount VandalUi::Engine, at: "/vandal"
+    mount VandalUi::Engine, at: '/vandal'
     # your routes go here
   end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root to: "models#index"
+  root to: 'ideas#index'
   resources :ideas
-  resources :associations
+  resources :associations, only: %i[new create destroy edit show] do
+    resources :steps, only: %i[show update], controller: 'associations/steps'
+  end
   devise_for :users
-  resources :users
-  resources :models
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :models, except: :index
 end

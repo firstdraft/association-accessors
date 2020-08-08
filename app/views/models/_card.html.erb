@@ -5,12 +5,41 @@
 
   <div class="card-body">
     <dl class="mb-1">
-      <dt>Name</dt>
+      <dt>Idea</dt>
+      <dd><%= link_to model.idea, model.idea %></dd>
+
+      <dt>Entered name</dt>
       <dd><%= model.name %></dd>
 
-      <dt>Idea</dt>
-      <dd><%= model.idea_id %></dd>
+      <dt>Classified name</dt>
+      <dd><%= model.class_name %></dd>
 
+      <dt>Pluralized name</dt>
+      <dd><%= model.plural_name %></dd>
+
+      <dt>Singularized name</dt>
+      <dd><%= model.singular_name %></dd>
+
+      <dt>direct_originating_associations_count</dt>
+      <dd><%= model.direct_originating_associations_count %></dd>
+
+      <dt>direct_terminating_associations_count</dt>
+      <dd><%= model.direct_terminating_associations_count %></dd>
+
+      <dt>foreign_key_locations_count</dt>
+      <dd><%= model.foreign_key_locations_count %></dd>
+
+      <dt>indirect_originating_associations_count</dt>
+      <dd><%= model.indirect_originating_associations_count %></dd>
+
+      <dt>indirect_terminating_associations_count</dt>
+      <dd><%= model.indirect_terminating_associations_count %></dd>
+
+      <dt>originating_associations_count</dt>
+      <dd><%= model.originating_associations_count %></dd>
+
+      <dt>terminating_associations_count</dt>
+      <dd><%= model.terminating_associations_count %></dd>
     </dl>
 
     <div class="row">

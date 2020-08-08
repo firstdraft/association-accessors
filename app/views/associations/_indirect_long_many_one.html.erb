@@ -1,0 +1,100 @@
+<p class="lead">When you filled out the wizard, you said that you want to define an instance method called <code><%= @association.name %></code> on the <code><%= @association.origin_model.class_name %></code> class that returns <%= @association.one? ? "a record" : "records" %> from the <%= @association.terminus_model.plural_name %> table.</p>
+
+<p class="lead">You said that it was an indirect association: that, in this relationship, <%= @association.origin_model.singular_name.indefinitize %> is related to <%= @association.terminus_model.plural_name %> through <%= @association.join_model.plural_name %>.</p>
+
+<p class="lead">To get from the origin <%= @association.origin_model.singular_name %> to the joining <%= @association.join_model.plural_name %>, you said to start with the existing <code><%= @association.origin_model.class_name %></code> method called <code><%= @association.through_association.name %></code>.</p>
+
+<p class="lead">Then, to get from each joining <%= @association.join_model.singular_name %> to the destination <%= @association.terminus_model.singular_name %>, you said to use the existing <code><%= @association.join_model.class_name %></code> method called <code><%= @association.source_association.name %></code>.</p>
+
+<p class="lead">Okay! With that info, we can help you write a method that makes it easy to query this relationship:</p>
+
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  def #{@association.name}
+    array_of_#{@association.terminus_model.singular_name}_ids = Array.new
+
+    my_#{@association.through_association.name} = self.#{@association.through_association.name}
+
+    my_#{@association.through_association.name}.each do |a_#{@association.join_model.singular_name}|
+      #{@association.source_association.name.singularize} = a_#{@association.join_model.singular_name}.#{@association.source_association.name}
+
+      array_of_#{@association.terminus_model.singular_name}_ids.push(#{@association.source_association.name.singularize}.id)
+    end
+
+    matching_#{@association.terminus_model.plural_name} = #{@association.terminus_model.class_name}.where({ :id => array_of_#{@association.terminus_model.singular_name}_ids })
+
+    return matching_#{@association.terminus_model.plural_name}
+  end
+
+  # ...
+end
+CODE
+)).html_safe %>
+
+<p class="lead">(Remember, the above assumes that you've already defined
+  <%= link_to @association.through_association do %>
+     the <code><%= @association.origin_model.class_name %>#<%= @association.through_association.name %></code> method
+  <% end %>
+  
+  and
+  
+  <%= link_to @association.source_association do %>
+    the <code><%= @association.join_model.class_name %>#<%= @association.source_association.name %></code> method
+  <% end %>.)
+</p>
+
+<p class="lead">But, here's a shorthand notation for telling Rails the same things you said when you filled out the wizard:</p>
+
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  has_many(:#{@association.name}, {
+    :through => :#{@association.through_association.name},
+    :source => :#{@association.source_association.name}
+  })
+  
+  # ...
+end
+CODE
+)).html_safe %>
+
+<p class="lead">If you use this shorthand, Rails can automatically define the entire method for you — and do it in a much more robust way, with many more features and better performance!</p>
+
+<p class="lead">Just like before, the above shorthand assumes that there are already existing methods
+  <%= link_to @association.through_association do %>
+     <code><%= @association.origin_model.class_name %>#<%= @association.through_association.name %></code>
+  <% end %>
+
+  and
+
+  <%= link_to @association.source_association do %>
+    <code><%= @association.join_model.class_name %>#<%= @association.source_association.name %></code>
+  <% end %>
+  
+  — so make sure you declare those too, and use the shorthand for them.
+</p>
+
+<hr>
+
+<% if @association.name.pluralize == @association.source_association.name.pluralize %>
+<p class="lead">In the spirit of "convention over configuration": you can get even more concise by taking advantage of some of Rails' wise defaults.
+</p>
+
+<p class="lead">Since the name of the new method you want to define, <code><%= @association.name %></code>, matches the name of the source association, <code><%= @association.source_association.name %></code>, you can leave it out of the shorthand; and Rails will assume that's the method you want it to call on the joining <code><%= @association.join_model.class_name %></code>:</p>
+
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  has_many(:#{@association.name}, {
+    :through => :#{@association.through_association.name}
+  })
+  
+  # ...
+end
+CODE
+)).html_safe %>
+<% end %>

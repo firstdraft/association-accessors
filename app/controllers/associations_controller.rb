@@ -6,7 +6,10 @@ class AssociationsController < ApplicationController
     @associations = @q.result(distinct: true).includes(:origin_model, :terminus_model, :direct_origin_model, :direct_terminus_model, :indirect_origin_model, :indirect_terminus_model, :indirect_associations_as_source, :source_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_through, :through_association).page(params[:page]).per(10)
   end
 
-  def show; end
+  def show
+    @formatter = Rouge::Formatters::HTMLPygments.new(Rouge::Formatters::HTML.new, css_class = 'codehilite')
+    @lexer = Rouge::Lexers::Ruby.new
+  end
 
   def new
     @association = Association.new
@@ -16,22 +19,13 @@ class AssociationsController < ApplicationController
 
   def create
     @association = Association.new(association_params)
-
-    if @association.save
-      message = "Association was successfully created."
-      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-        redirect_back fallback_location: request.referer, notice: message
-      else
-        redirect_to @association, notice: message
-      end
-    else
-      render :new
-    end
+    @association.save(validate: false)
+    redirect_to association_step_path(@association, Association.form_steps.first)
   end
 
   def update
     if @association.update(association_params)
-      redirect_to @association, notice: "Association was successfully updated."
+      redirect_to @association, notice: 'Association was successfully updated.'
     else
       render :edit
     end
@@ -39,7 +33,7 @@ class AssociationsController < ApplicationController
 
   def destroy
     @association.destroy
-    message = "Association was successfully deleted."
+    message = 'Association was successfully deleted.'
     if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
       redirect_back fallback_location: request.referer, notice: message
     else
@@ -54,6 +48,6 @@ class AssociationsController < ApplicationController
   end
 
   def association_params
-    params.require(:association).permit(:name, :source_association_id, :through_association_id, :origin_model_id, :terminus_model_id, :foreign_key, :nature)
+    params.require(:association).permit(:name, :source_association_id, :through_association_id, :origin_model_id, :terminus_model_id, :foreign_key, :nature, :idea_id)
   end
 end

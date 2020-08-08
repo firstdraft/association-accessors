@@ -2,9 +2,7 @@
   <div class="card-header d-flex align-items-center justify-content-between">
     Direct Terminating Associations
 
-    <a data-toggle="collapse" href="#model_direct_terminating_associations_new_form">
-      Add association
-    </a>
+    <%= link_to 'Add association', associations_path(association: { idea_id: @model.idea }), method: :post %>how
   </div>
 
   <ul class="list-group list-group-flush">

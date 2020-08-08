@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Associations
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @idea.associations.finished.order(created_at: :desc).each do |association| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <span>
+          <span class="badge badge-secondary">
+            <%= association.origin_model.class_name %>
+          </span>
+
+          &nbsp;
+
+          <%= link_to association, association %>
+        </span>
+
+        <%= link_to association, method: :delete, data: { confirm: "Do you really want to delete this association" } do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+
+      </li>
+    <% end %>
+  </ul>
+</div>

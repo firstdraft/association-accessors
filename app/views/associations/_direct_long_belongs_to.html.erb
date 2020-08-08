@@ -1,0 +1,117 @@
+<p class="lead">When you filled out the wizard, you said that you want to define an instance method called <code><%= @association.name %></code> on the <code><%= @association.origin_model.class_name %></code> class that returns <%= @association.one? ? "a record" : "records" %> from the <%= @association.terminus_model.plural_name %> table.</p>
+
+<p class="lead">You said that it was a direct association: that, in this relationship, the ID of <%= @association.parent_model.singular_name.indefinitize %> is stored in the <%= @association.foreign_key %> column of <%= @association.foreign_key_location_model.singular_name.indefinitize %>.</p>
+
+<p class="lead">Okay! With that info, we can help you write a method that makes it easy to query this relationship:</p>
+
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  def #{@association.name}
+    my_#{@association.foreign_key} = self.#{@association.foreign_key}
+
+    matching_#{@association.terminus_model.plural_name} = #{@association.terminus_model.class_name}.where({ :id => my_#{@association.foreign_key} })
+
+    the_#{@association.terminus_model.singular_name} = matching_#{@association.terminus_model.plural_name}.at(0)
+
+    return the_#{@association.terminus_model.singular_name}
+  end
+
+  # ...
+end
+CODE
+)).html_safe %>
+
+<p class="lead">But, here's a shorthand notation for telling Rails the same things you said when you filled out the wizard:</p>
+
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  belongs_to(:#{@association.name}, {
+    :class_name => "#{@association.parent_model.class_name}",
+    :foreign_key => "#{@association.foreign_key}"
+  })
+  
+  # ...
+end
+CODE
+)).html_safe %>
+
+<p class="lead">If you use this shorthand, Rails can automatically define the entire method for you — and do it in a much more robust way, with many more features and better performance!</p>
+
+<hr>
+
+<p class="lead">One of many advantages of using <a href="https://guides.rubyonrails.org/association_basics.html" target="_blank">ActiveRecord's built-in Associations</a> instead of hand-writing accessor methods is that we can add additional options to the configuration hash. For example, the <code>:required => :true</code> option is very often useful to add to the <code>belongs_to</code> side of a direct association:</p>
+
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  belongs_to(:#{@association.name}, {
+    :class_name => "#{@association.parent_model.class_name}",
+    :foreign_key => "#{@association.foreign_key}",
+    :required => true
+  })
+  
+  # ...
+end
+CODE
+)).html_safe %>
+
+<p class="lead">Now, the presence of an associated <%= @association.parent_model.singular_name %> (not just the presence of a value in the <%= @association.foreign_key %> column, which might not correspond to a real row, but an actual corresponding record) will automatically be validated on save.</p>
+
+<% if @association.can_eliminate_class_name? || @association.can_eliminate_foreign_key? %>
+  <hr>
+
+  <p class="lead">In the spirit of "convention over configuration": you can get even more concise by taking advantage of some of Rails' wise defaults.
+  </p>
+
+  <% if @association.can_eliminate_foreign_key? %>
+    <p class="lead">Since the name of the foreign key column, <code><%=@association.foreign_key %></code>, matches the name of the method you're defining, <code><%= @association.name %></code>, you can leave the <code>:foreign_key</code> option out of the hash; and Rails will infer the foreign key column you want to use:</p>
+    
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  belongs_to(:#{@association.name}, {
+    :class_name => "#{@association.parent_model.class_name}"
+  })
+  
+  # ...
+end
+CODE
+)).html_safe %>
+  <% end %>
+
+  <% if @association.can_eliminate_class_name? %>
+    <p class="lead">Since the name of the new method you want to define, <code><%= @association.name %></code>, matches the name of the associated model, <code><%= @association.parent_model.class_name %></code>, you can leave the <code>:class_name</code> option out of the hash; and Rails will infer the class you want it to use:</p>
+
+    <% if @association.can_eliminate_foreign_key? %>
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  belongs_to(:#{@association.name})
+  
+  # ...
+end
+CODE
+)).html_safe %>
+    <% else %>
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  belongs_to(:#{@association.name}, {
+    :foreign_key => "#{@association.foreign_key}"
+  })
+  
+  # ...
+end
+CODE
+)).html_safe %>
+    <% end %>
+  <% end %>
+<% end %>
