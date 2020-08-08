@@ -15,7 +15,7 @@ class Associations::StepsController < ApplicationController
     if step == 'nature' && @association.indirect?
       jump_to(:through)
       render_wizard
-    elsif step == 'foreign_key' && @association.valid?
+    elsif step == 'foreign_key_location' && @association.valid?
       jump_to(:name)
       render_wizard
     else
