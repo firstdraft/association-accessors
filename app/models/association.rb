@@ -3,6 +3,7 @@
 # Table name: associations
 #
 #  id                                     :integer          not null, primary key
+#  complete                               :boolean
 #  foreign_key                            :string
 #  indirect_associations_as_source_count  :integer
 #  indirect_associations_as_through_count :integer
@@ -10,10 +11,19 @@
 #  nature                                 :integer
 #  created_at                             :datetime         not null
 #  updated_at                             :datetime         not null
+#  idea_id                                :integer          not null
 #  origin_model_id                        :integer
 #  source_association_id                  :integer
 #  terminus_model_id                      :integer
 #  through_association_id                 :integer
+#
+# Indexes
+#
+#  index_associations_on_idea_id  (idea_id)
+#
+# Foreign Keys
+#
+#  idea_id  (idea_id => ideas.id)
 #
 class Association < ApplicationRecord
   enum nature: { "direct" => 0, "indirect" => 1 }
@@ -72,13 +82,17 @@ class Association < ApplicationRecord
 
   belongs_to :terminus_model,
              class_name: "Model",
-             counter_cache: :terminating_associations_count
+             counter_cache: :terminating_associations_count,
+             optional: true
 
   belongs_to :origin_model,
              class_name: "Model",
-             counter_cache: :originating_associations_count
+             counter_cache: :originating_associations_count,
+             optional: true
 
   # Indirect associations
+
+  
 
   # Validations
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_08_032410) do
+ActiveRecord::Schema.define(version: 2020_08_08_091434) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 2020_08_08_032410) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "indirect_associations_as_source_count"
     t.integer "indirect_associations_as_through_count"
+    t.boolean "complete"
+    t.integer "idea_id", null: false
+    t.index ["idea_id"], name: "index_associations_on_idea_id"
   end
 
   create_table "ideas", force: :cascade do |t|
@@ -126,6 +129,7 @@ ActiveRecord::Schema.define(version: 2020_08_08_032410) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "associations", "ideas"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

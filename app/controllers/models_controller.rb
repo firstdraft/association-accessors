@@ -21,11 +21,8 @@ class ModelsController < ApplicationController
 
     if @model.save
       message = "Model was successfully created."
-      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-        redirect_back fallback_location: request.referer, notice: message
-      else
-        redirect_to @model, notice: message
-      end
+      
+      redirect_to @model.idea, notice: message
     else
       render :new
     end

@@ -3,6 +3,7 @@
 # Table name: associations
 #
 #  id                                     :integer          not null, primary key
+#  complete                               :boolean
 #  foreign_key                            :string
 #  indirect_associations_as_source_count  :integer
 #  indirect_associations_as_through_count :integer
@@ -10,10 +11,19 @@
 #  nature                                 :integer
 #  created_at                             :datetime         not null
 #  updated_at                             :datetime         not null
+#  idea_id                                :integer          not null
 #  origin_model_id                        :integer
 #  source_association_id                  :integer
 #  terminus_model_id                      :integer
 #  through_association_id                 :integer
+#
+# Indexes
+#
+#  index_associations_on_idea_id  (idea_id)
+#
+# Foreign Keys
+#
+#  idea_id  (idea_id => ideas.id)
 #
 require "rails_helper"
 
