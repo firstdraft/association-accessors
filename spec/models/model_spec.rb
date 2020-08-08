@@ -3,7 +3,7 @@
 # Table name: models
 #
 #  id                                      :integer          not null, primary key
-#  classified_name                         :string
+#  class_name                              :string
 #  direct_originating_associations_count   :integer
 #  direct_terminating_associations_count   :integer
 #  indirect_originating_associations_count :integer

@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2020_08_08_191733) do
     t.integer "direct_terminating_associations_count"
     t.integer "indirect_originating_associations_count"
     t.integer "indirect_terminating_associations_count"
-    t.string "classified_name"
+    t.string "class_name"
     t.string "singular_name"
     t.string "plural_name"
   end

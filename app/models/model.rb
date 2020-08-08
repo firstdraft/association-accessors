@@ -3,7 +3,7 @@
 # Table name: models
 #
 #  id                                      :integer          not null, primary key
-#  classified_name                         :string
+#  class_name                              :string
 #  direct_originating_associations_count   :integer
 #  direct_terminating_associations_count   :integer
 #  indirect_originating_associations_count :integer
@@ -68,14 +68,16 @@ class Model < ApplicationRecord
 
   # Validations
 
-  validates :name, uniqueness: { scope: :idea_id }
+  validates :classified_name, presence: true, uniqueness: { scope: :idea_id }
 
   # Scopes
 
   before_validation :normalize_name
   
   def normalize_name
-    self.name = self.name.singularize.camelize
+    self.plural_name = name.pluralize.parameterize("_")
+    self.singular_name = plural_name.singularize
+    self.classified_name = singular_name.classify
   end
 
   def to_s
