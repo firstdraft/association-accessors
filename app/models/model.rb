@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: models
+#
+#  id                                      :integer          not null, primary key
+#  direct_originating_associations_count   :integer
+#  direct_terminating_associations_count   :integer
+#  indirect_originating_associations_count :integer
+#  indirect_terminating_associations_count :integer
+#  name                                    :string
+#  originating_associations_count          :integer
+#  terminating_associations_count          :integer
+#  created_at                              :datetime         not null
+#  updated_at                              :datetime         not null
+#  idea_id                                 :integer
+#
 class Model < ApplicationRecord
   # Direct associations
 

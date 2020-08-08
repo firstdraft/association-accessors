@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: associations
+#
+#  id                                     :integer          not null, primary key
+#  foreign_key                            :string
+#  indirect_associations_as_source_count  :integer
+#  indirect_associations_as_through_count :integer
+#  name                                   :string
+#  nature                                 :integer
+#  created_at                             :datetime         not null
+#  updated_at                             :datetime         not null
+#  origin_model_id                        :integer
+#  source_association_id                  :integer
+#  terminus_model_id                      :integer
+#  through_association_id                 :integer
+#
 require "rails_helper"
 
 RSpec.describe Association, type: :model do
