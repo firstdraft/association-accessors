@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "models#index"
   resources :ideas
   resources :indirect_associations
   resources :direct_associations
