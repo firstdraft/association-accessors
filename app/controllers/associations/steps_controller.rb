@@ -11,6 +11,14 @@ class Associations::StepsController < ApplicationController
   def update
     @association = Association.find(params[:association_id])
     @association.update(association_params(step))
+
+    case step
+    when :foreign_key
+      if @association.indirect?
+        jump_to(:through)
+      end
+    end
+
     render_wizard @association
   end
 
