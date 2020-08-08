@@ -2,7 +2,7 @@
 #
 # Table name: ideas
 #
-#  id                 :integer          not null, primary key
+#  id                 :bigint           not null, primary key
 #  associations_count :integer          default(0)
 #  name               :string
 #  created_at         :datetime         not null

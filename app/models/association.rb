@@ -2,7 +2,7 @@
 #
 # Table name: associations
 #
-#  id                                     :integer          not null, primary key
+#  id                                     :bigint           not null, primary key
 #  complete                               :boolean
 #  foreign_key                            :string
 #  indirect_associations_as_source_count  :integer
@@ -11,7 +11,8 @@
 #  nature                                 :integer
 #  created_at                             :datetime         not null
 #  updated_at                             :datetime         not null
-#  idea_id                                :integer          not null
+#  foreign_key_location_model_id          :bigint
+#  idea_id                                :bigint           not null
 #  origin_model_id                        :integer
 #  source_association_id                  :integer
 #  terminus_model_id                      :integer
@@ -19,11 +20,13 @@
 #
 # Indexes
 #
-#  index_associations_on_idea_id  (idea_id)
+#  index_associations_on_foreign_key_location_model_id  (foreign_key_location_model_id)
+#  index_associations_on_idea_id                        (idea_id)
 #
 # Foreign Keys
 #
-#  idea_id  (idea_id => ideas.id)
+#  fk_rails_...  (foreign_key_location_model_id => models.id)
+#  fk_rails_...  (idea_id => ideas.id)
 #
 class Association < ApplicationRecord
   enum nature: { 'direct' => 0, 'indirect' => 1 }

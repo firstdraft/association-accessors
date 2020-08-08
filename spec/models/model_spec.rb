@@ -2,7 +2,7 @@
 #
 # Table name: models
 #
-#  id                                      :integer          not null, primary key
+#  id                                      :bigint           not null, primary key
 #  class_name                              :string
 #  direct_originating_associations_count   :integer
 #  direct_terminating_associations_count   :integer
