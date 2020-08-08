@@ -1,6 +1,8 @@
 class Model < ApplicationRecord
   # Direct associations
 
+  belongs_to :idea
+
   has_many   :terminating_indirect_associations,
              :class_name => "IndirectAssociation",
              :foreign_key => "terminus_model_id",

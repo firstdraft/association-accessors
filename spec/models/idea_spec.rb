@@ -4,6 +4,8 @@ RSpec.describe Idea, type: :model do
   
     describe "Direct Associations" do
 
+    it { should have_many(:models) }
+
     it { should belong_to(:user) }
 
     end
