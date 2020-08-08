@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  namespace :association do
-    get 'steps/show'
-    get 'steps/update'
-  end
   use_doorkeeper
   scope path: ApplicationResource.endpoint_namespace, defaults: { format: :jsonapi } do
     scope module: "api/v1", as: "api" do
@@ -23,9 +19,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root to: "ideas#index"
   resources :ideas
-  resources :associations, except: :index
+  resources :associations, only: [:new, :create, :destroy, :edit] do
+    resources :steps, only: [:show, :update], controller: 'associations/steps'
+  end
   devise_for :users
   resources :models, except: :index
-
-  resources :build_association
 end

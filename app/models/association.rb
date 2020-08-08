@@ -18,6 +18,12 @@
 class Association < ApplicationRecord
   enum nature: { "direct" => 0, "indirect" => 1 }
 
+  cattr_accessor :form_steps do
+  	%w(origin_model terminus_model nature foreign_key through source name)
+  end
+
+  attr_accessor :form_step
+
   # Direct associations
 
   belongs_to :through_association,
@@ -76,7 +82,42 @@ class Association < ApplicationRecord
 
   # Validations
 
-  # Scopes
+  with_options if: -> { form_step == :origin_model } do |step|
+    step.validates :origin_model, presence: true
+  end
+
+  with_options if: -> { form_step == :terminus_model } do |step|
+    step.validates :origin_model, presence: true
+    step.validates :terminus_model, presence: true
+  end
+
+  with_options if: -> { form_step == :nature } do |step|
+    step.validates :origin_model, presence: true
+    step.validates :terminus_model, presence: true
+    step.validates :nature, presence: true
+  end
+
+  with_options if: -> { form_step == :foreign_key } do |step|
+    step.validates :origin_model, presence: true
+    step.validates :terminus_model, presence: true
+    step.validates :nature, presence: true
+    step.validates :foreign_key, presence: true
+  end
+
+  with_options if: -> { form_step == :through } do |step|
+    step.validates :origin_model, presence: true
+    step.validates :terminus_model, presence: true
+    step.validates :nature, presence: true
+    step.validates :through_association, presence: true
+  end
+
+  with_options if: -> { form_step == :source } do |step|
+    step.validates :origin_model, presence: true
+    step.validates :terminus_model, presence: true
+    step.validates :nature, presence: true
+    step.validates :through_association, presence: true
+    step.validates :source_association, presence: true
+  end
 
   def to_s
     name
