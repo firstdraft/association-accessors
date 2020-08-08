@@ -3,7 +3,7 @@ class DirectAssociationsController < ApplicationController
 
   # GET /direct_associations
   def index
-    @direct_associations = DirectAssociation.all
+    @direct_associations = DirectAssociation.page(params[:page]).per(10)
   end
 
   # GET /direct_associations/1

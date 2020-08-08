@@ -3,7 +3,7 @@ class ModelsController < ApplicationController
 
   # GET /models
   def index
-    @models = Model.all
+    @models = Model.page(params[:page]).per(10)
   end
 
   # GET /models/1

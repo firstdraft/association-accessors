@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas
   def index
-    @ideas = Idea.all
+    @ideas = Idea.page(params[:page]).per(10)
   end
 
   # GET /ideas/1
