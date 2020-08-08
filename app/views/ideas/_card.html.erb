@@ -12,7 +12,7 @@
       <dd><%= idea.user_id %></dd>
 
       <dt>Build association</dt>
-      <dd><%= link_to "Start wizard", build_association_path(:origin_model) %></dd>
+      <dd><%= link_to 'Start wizard', associations_path, method: :post %></dd>
 
     </dl>
 

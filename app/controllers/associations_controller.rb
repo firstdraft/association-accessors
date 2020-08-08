@@ -15,18 +15,9 @@ class AssociationsController < ApplicationController
   def edit; end
 
   def create
-    @association = Association.new(association_params)
-
-    if @association.save
-      message = "Association was successfully created."
-      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-        redirect_back fallback_location: request.referer, notice: message
-      else
-        redirect_to @association, notice: message
-      end
-    else
-      render :new
-    end
+    @association = Association.new
+    @association.save(validate: false)
+    redirect_to association_step_path(@association, Association.form_steps.first)
   end
 
   def update
