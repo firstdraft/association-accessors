@@ -153,14 +153,14 @@ class Association < ApplicationRecord
     validates :origin_model, presence: true
     validates :terminus_model, presence: true
     validates :nature, presence: true
-    validates :name, presence: true, uniqueness: { scope: :origin_model_id }
+    validates :name, presence: true, uniqueness: { scope: [:origin_model_id, :complete] }
   end
 
   scope :complete, -> { where(complete: true) }
 
   default_scope { complete }
 
-  before_validation :foreign_key
+  before_validation :normalize_foreign_key
   before_validation :normalize_name
 
   after_validation :set_complete
@@ -169,7 +169,7 @@ class Association < ApplicationRecord
     name
   end
 
-  def normalize_name
+  def normalize_foreign_key
     self.foreign_key = foreign_key.try(:parameterize, separator: '_')
   end
 
