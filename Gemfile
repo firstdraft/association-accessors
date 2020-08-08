@@ -24,13 +24,10 @@ gem "rollbar"
 gem "rspec-rails"
 gem "rubocop-rails", "2.5.2", require: false
 gem "sass-rails", ">= 6"
-gem "seed_dump", git: "https://github.com/firstdraft/seed_dump.git"
 gem "shoulda-matchers"
 gem "sprockets", "~> 3.7"
 gem "sprockets-rails", require: "sprockets/railtie"
 gem "vandal_ui", "~> 0.4"
-gem "wdm" if Gem.win_platform?
-gem "web_git", github: "firstdraft/web_git"
 gem "wicked"
 
 group :development, :test do
