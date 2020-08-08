@@ -1,4 +1,6 @@
 class IdeasController < ApplicationController
+  before_action :current_user_must_be_idea_user, only: [:edit, :update, :destroy] 
+
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
 
   # GET /ideas
@@ -58,6 +60,14 @@ class IdeasController < ApplicationController
 
 
   private
+
+  def current_user_must_be_idea_user
+    set_idea
+    unless current_user == @idea.user
+      redirect_back fallback_location: root_path, alert: "You are not authorized for that."
+    end
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_idea
       @idea = Idea.find(params[:id])

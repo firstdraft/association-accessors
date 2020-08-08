@@ -24,16 +24,20 @@
 
       <!-- Edit link idea start -->
       <div class="col">
-        <%= link_to edit_idea_url(idea), class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-edit"></i>
+        <% if current_user == @idea.user %>
+          <%= link_to edit_idea_url(idea), class: "btn btn-block btn-sm btn-outline-secondary" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
         <% end %>
       </div>
       <!-- Edit link idea end -->
 
       <!-- Delete link idea start -->
       <div class="col">
-        <%= link_to idea, method: :delete, data: { confirm: "Do you really want to delete this idea?" }, class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-trash-alt"></i>
+        <% if current_user == @idea.user %>
+          <%= link_to idea, method: :delete, data: { confirm: "Do you really want to delete this idea?" }, class: "btn btn-block btn-outline-secondary" do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
         <% end %>
       </div>
       <!-- Delete link idea end -->
