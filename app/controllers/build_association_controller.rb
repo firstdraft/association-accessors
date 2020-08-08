@@ -4,7 +4,7 @@ class BuildAssociationController < ApplicationController
   steps :origin_model, :terminus_model, :nature
 
   def show
-    @user = current_user
+    @association = Association.new
     case step
     when :origin_model
       @stuff = "origin_model"

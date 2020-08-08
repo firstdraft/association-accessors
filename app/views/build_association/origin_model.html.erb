@@ -1,1 +1,179 @@
 <h1><%= @stuff %></h1>
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-8">
+    <div class="card">
+      <h2 class="card-header h4">
+        New Association
+      </h2>
+
+      <div class="card-body">
+        <% was_validated = @association.errors.any? %>
+
+        <%= form_with(model: @association, local: true, novalidate: true, class: "mb-3") do |f| %>
+          <div class="form-group">
+            <% name_class = "form-control" %>
+            <% name_was_invalid = @association.errors.include?(:name) %>
+
+            <% if was_validated %>
+              <% if name_was_invalid %>
+                <% name_class << " is-invalid" %>
+              <% else %>
+                <% name_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :name %>
+            <%= f.text_field :name, class: name_class, placeholder: "Enter name" %>
+            <% if name_was_invalid %>
+              <% @association.errors.full_messages_for(:name).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <% source_association_id_class = "form-control" %>
+            <% source_association_id_was_invalid = @association.errors.include?(:source_association_id) %>
+
+            <% if was_validated %>
+              <% if source_association_id_was_invalid %>
+                <% source_association_id_class << " is-invalid" %>
+              <% else %>
+                <% source_association_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :source_association_id %>
+            <%= f.select :source_association_id, options_from_collection_for_select(Association.all, :id, :to_s, @association.source_association_id), {}, class: "form-control" %>
+            <% if source_association_id_was_invalid %>
+              <% @association.errors.full_messages_for(:source_association_id).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <% through_association_id_class = "form-control" %>
+            <% through_association_id_was_invalid = @association.errors.include?(:through_association_id) %>
+
+            <% if was_validated %>
+              <% if through_association_id_was_invalid %>
+                <% through_association_id_class << " is-invalid" %>
+              <% else %>
+                <% through_association_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :through_association_id %>
+            <%= f.select :through_association_id, options_from_collection_for_select(Association.all, :id, :to_s, @association.through_association_id), {}, class: "form-control" %>
+            <% if through_association_id_was_invalid %>
+              <% @association.errors.full_messages_for(:through_association_id).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <% origin_model_id_class = "form-control" %>
+            <% origin_model_id_was_invalid = @association.errors.include?(:origin_model_id) %>
+
+            <% if was_validated %>
+              <% if origin_model_id_was_invalid %>
+                <% origin_model_id_class << " is-invalid" %>
+              <% else %>
+                <% origin_model_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :origin_model_id %>
+            <%= f.select :origin_model_id, options_from_collection_for_select(Model.all, :id, :to_s, @association.origin_model_id), {}, class: "form-control" %>
+            <% if origin_model_id_was_invalid %>
+              <% @association.errors.full_messages_for(:origin_model_id).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <% terminus_model_id_class = "form-control" %>
+            <% terminus_model_id_was_invalid = @association.errors.include?(:terminus_model_id) %>
+
+            <% if was_validated %>
+              <% if terminus_model_id_was_invalid %>
+                <% terminus_model_id_class << " is-invalid" %>
+              <% else %>
+                <% terminus_model_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :terminus_model_id %>
+            <%= f.select :terminus_model_id, options_from_collection_for_select(Model.all, :id, :to_s, @association.terminus_model_id), {}, class: "form-control" %>
+            <% if terminus_model_id_was_invalid %>
+              <% @association.errors.full_messages_for(:terminus_model_id).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <% foreign_key_class = "form-control" %>
+            <% foreign_key_was_invalid = @association.errors.include?(:foreign_key) %>
+
+            <% if was_validated %>
+              <% if foreign_key_was_invalid %>
+                <% foreign_key_class << " is-invalid" %>
+              <% else %>
+                <% foreign_key_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :foreign_key %>
+            <%= f.text_field :foreign_key, class: foreign_key_class, placeholder: "Enter foreign key" %>
+            <% if foreign_key_was_invalid %>
+              <% @association.errors.full_messages_for(:foreign_key).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <% nature_class = "form-control" %>
+            <% nature_was_invalid = @association.errors.include?(:nature) %>
+
+            <% if was_validated %>
+              <% if nature_was_invalid %>
+                <% nature_class << " is-invalid" %>
+              <% else %>
+                <% nature_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :nature %>
+            <%= f.select :nature, options_for_select(Association.natures.keys), {}, class: "form-control" %>
+            <% if nature_was_invalid %>
+              <% @association.errors.full_messages_for(:nature).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <%= f.button class: "btn btn-outline-secondary btn-block" %>
+        <% end %>
+
+
+        <%= link_to :back, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-chevron-left fa-fw"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
