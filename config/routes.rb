@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   resources :associations, except: :index
   devise_for :users
   resources :models, except: :index
+
+  resources :build_association
 end

@@ -1,13 +1,18 @@
 class BuildAssociationController < ApplicationController
   include Wicked::Wizard
 
-  steps :confirm_password, :confirm_profile, :find_friends
+  steps :origin_model, :terminus_model, :nature
 
   def show
     @user = current_user
     case step
-    when :find_friends
-      @friends = @user.find_friends
+    when :origin_model
+      @stuff = "origin_model"
+    when :terminus_model
+      @stuff = "terminus_model"
+    when :nature
+      @stuff = "nature"
+     
     end
     render_wizard
   end
