@@ -22,6 +22,10 @@ class Associations::StepsController < ApplicationController
       render_wizard @association
     end
   end
+  
+  def finish_wizard_path
+    association_path(@association)
+  end
 
   private
 

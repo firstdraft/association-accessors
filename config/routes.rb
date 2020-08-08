@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   root to: "ideas#index"
   resources :ideas
-  resources :associations, only: [:new, :create, :destroy, :edit] do
+  resources :associations, only: [:new, :create, :destroy, :edit, :show] do
     resources :steps, only: [:show, :update], controller: 'associations/steps'
   end
   devise_for :users

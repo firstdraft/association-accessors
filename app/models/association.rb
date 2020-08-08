@@ -135,14 +135,27 @@ class Association < ApplicationRecord
     step.validates :source_association, presence: true
   end
 
+  with_options if: -> { form_step == "name" } do |step|
+    step.validates :origin_model, presence: true
+    step.validates :terminus_model, presence: true
+    step.validates :nature, presence: true
+    step.validates :name, presence: true, uniqueness: { scope: [:origin_model_id] }
+  end
+
   scope :complete, -> { where(complete: true) }
 
   default_scope { complete }
+
+  before_validation :normalize_name
 
   after_validation :set_complete
 
   def to_s
     name
+  end
+
+  def normalize_name
+    self.name = self.name.try(:parameterize, separator: "_")
   end
 
   def set_complete
