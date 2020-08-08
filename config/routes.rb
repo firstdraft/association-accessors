@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ideas
   resources :indirect_associations
   resources :direct_associations
   devise_for :users
