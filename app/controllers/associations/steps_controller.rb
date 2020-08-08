@@ -4,6 +4,8 @@ class Associations::StepsController < ApplicationController
   steps *Association.form_steps
 
   def show
+    @association = Association.find(params[:association_id])
+    render_wizard
   end
 
   def update
