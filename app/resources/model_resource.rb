@@ -27,4 +27,32 @@ class ModelResource < ApplicationResource
 
   # Indirect associations
 
+  has_many :direct_origin_models, resource: ModelResource do
+    assign_each do |model, models|
+      models.select do |m|
+        m.id.in?(model.direct_origin_models.map(&:id))
+      end
+    end
+  end
+
+  has_many :direct_terminus_models, resource: ModelResource do
+    assign_each do |model, models|
+      models.select do |m|
+        m.id.in?(model.direct_terminus_models.map(&:id))
+      end
+    end
+  end
+
+
+  filter :origin_model_id, :integer do
+    eq do |scope, value|
+      scope.eager_load(:direct_origin_models).where(:direct_associations => {:origin_model_id => value})
+    end
+  end
+
+  filter :terminus_model_id, :integer do
+    eq do |scope, value|
+      scope.eager_load(:direct_terminus_models).where(:direct_associations => {:terminus_model_id => value})
+    end
+  end
 end
