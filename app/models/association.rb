@@ -139,7 +139,7 @@ class Association < ApplicationRecord
     step.validates :origin_model, presence: true
     step.validates :terminus_model, presence: true
     step.validates :nature, presence: true
-    step.validates :name, presence: true, uniqueness: { scope: [:origin_model_id] }
+    step.validates :name, presence: true, uniqueness: { scope: :origin_model_id }
   end
 
   scope :complete, -> { where(complete: true) }
