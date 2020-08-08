@@ -68,7 +68,7 @@
             <% end %>
 
             <%= f.label :nature %>
-            <%= f.select :nature, options_for_select(Association.natures.keys), {}, class: "form-control", disabled: true %>
+            <%= f.collection_select :nature, Association.natures.keys, :to_s, :to_s, {}, class: "form-control", disabled: true %>
             <% if nature_was_invalid %>
               <% @association.errors.full_messages_for(:nature).each do |message| %>
                 <div class="invalid-feedback d-flex">

@@ -12,14 +12,15 @@ class Associations::StepsController < ApplicationController
     @association = Association.find(params[:association_id])
     @association.update(association_params(step))
 
-    case step
-    when :foreign_key
-      if @association.indirect?
-        jump_to(:through)
-      end
+    if step == "nature" && @association.indirect?
+      jump_to(:through)
+      render_wizard
+    elsif step == "foreign_key" && @association.valid?
+      jump_to(:name)
+      render_wizard
+    else
+      render_wizard @association
     end
-
-    render_wizard @association
   end
 
   private
