@@ -22,7 +22,7 @@ class AssociationsController < ApplicationController
 
   def update
     if @association.update(association_params)
-      redirect_to @association, notice: "Association was successfully updated."
+      redirect_to @association, notice: 'Association was successfully updated.'
     else
       render :edit
     end
@@ -30,7 +30,7 @@ class AssociationsController < ApplicationController
 
   def destroy
     @association.destroy
-    message = "Association was successfully deleted."
+    message = 'Association was successfully deleted.'
     if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
       redirect_back fallback_location: request.referer, notice: message
     else

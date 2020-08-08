@@ -7,12 +7,12 @@ class BuildAssociationController < ApplicationController
     @association = Association.new
     case step
     when :origin_model
-      @stuff = "origin_model"
+      @stuff = 'origin_model'
     when :terminus_model
-      @stuff = "terminus_model"
+      @stuff = 'terminus_model'
     when :nature
-      @stuff = "nature"
-     
+      @stuff = 'nature'
+
     end
     render_wizard
   end

@@ -22,7 +22,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
 
     if @idea.save
-      message = "Idea was successfully created."
+      message = 'Idea was successfully created.'
       if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
         redirect_back fallback_location: request.referer, notice: message
       else
@@ -35,7 +35,7 @@ class IdeasController < ApplicationController
 
   def update
     if @idea.update(idea_params)
-      redirect_to @idea, notice: "Idea was successfully updated."
+      redirect_to @idea, notice: 'Idea was successfully updated.'
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class IdeasController < ApplicationController
 
   def destroy
     @idea.destroy
-    message = "Idea was successfully deleted."
+    message = 'Idea was successfully deleted.'
     if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
       redirect_back fallback_location: request.referer, notice: message
     else
@@ -56,7 +56,7 @@ class IdeasController < ApplicationController
   def current_user_must_be_idea_user
     set_idea
     unless current_user == @idea.user
-      redirect_back fallback_location: root_path, alert: "You are not authorized for that."
+      redirect_back fallback_location: root_path, alert: 'You are not authorized for that.'
     end
   end
 

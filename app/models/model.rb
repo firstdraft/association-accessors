@@ -24,36 +24,36 @@ class Model < ApplicationRecord
 
   has_many   :indirect_terminating_associations,
              -> { indirect },
-             class_name: "Association",
-             foreign_key: "terminus_model_id",
+             class_name: 'Association',
+             foreign_key: 'terminus_model_id',
              dependent: :destroy
 
   has_many   :indirect_originating_associations,
              -> { indirect },
-             class_name: "Association",
-             foreign_key: "origin_model_id",
+             class_name: 'Association',
+             foreign_key: 'origin_model_id',
              dependent: :destroy
 
   has_many   :direct_terminating_associations,
              -> { direct },
-             class_name: "Association",
-             foreign_key: "terminus_model_id",
+             class_name: 'Association',
+             foreign_key: 'terminus_model_id',
              dependent: :destroy
 
   has_many   :direct_originating_associations,
              -> { direct },
-             class_name: "Association",
-             foreign_key: "origin_model_id",
+             class_name: 'Association',
+             foreign_key: 'origin_model_id',
              dependent: :destroy
 
   has_many   :terminating_associations,
-             class_name: "Association",
-             foreign_key: "terminus_model_id",
+             class_name: 'Association',
+             foreign_key: 'terminus_model_id',
              dependent: :destroy
 
   has_many   :originating_associations,
-             class_name: "Association",
-             foreign_key: "origin_model_id",
+             class_name: 'Association',
+             foreign_key: 'origin_model_id',
              dependent: :destroy
 
   # Indirect associations
@@ -73,9 +73,9 @@ class Model < ApplicationRecord
   # Scopes
 
   before_validation :normalize_name
-  
+
   def normalize_name
-    self.plural_name = name.pluralize.parameterize(separator: "_")
+    self.plural_name = name.pluralize.parameterize(separator: '_')
     self.singular_name = plural_name.singularize
     self.class_name = singular_name.classify
   end

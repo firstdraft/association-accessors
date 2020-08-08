@@ -1,11 +1,11 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "models#create", type: :request do
+RSpec.describe 'models#create', type: :request do
   subject(:make_request) do
-    jsonapi_post "/api/v1/models", payload
+    jsonapi_post '/api/v1/models', payload
   end
 
-  describe "basic create" do
+  describe 'basic create' do
     let(:params) do
       {
         # ... your attrs here
@@ -14,13 +14,13 @@ RSpec.describe "models#create", type: :request do
     let(:payload) do
       {
         data: {
-          type: "models",
-          attributes: params,
-        },
+          type: 'models',
+          attributes: params
+        }
       }
     end
 
-    it "works" do
+    it 'works' do
       expect(ModelResource).to receive(:build).and_call_original
       expect do
         make_request

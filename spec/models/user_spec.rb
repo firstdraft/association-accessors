@@ -16,16 +16,16 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "Direct Associations" do
+  describe 'Direct Associations' do
     it { should have_many(:ideas) }
   end
 
-  describe "InDirect Associations" do
+  describe 'InDirect Associations' do
   end
 
-  describe "Validations" do
+  describe 'Validations' do
   end
 end

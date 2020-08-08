@@ -26,10 +26,10 @@
 #  idea_id  (idea_id => ideas.id)
 #
 class Association < ApplicationRecord
-  enum nature: { "direct" => 0, "indirect" => 1 }
+  enum nature: { 'direct' => 0, 'indirect' => 1 }
 
   cattr_accessor :form_steps do
-  	%w(origin_model terminus_model nature foreign_key through source name)
+    %w[origin_model terminus_model nature foreign_key through source name]
   end
 
   attr_accessor :form_step
@@ -39,107 +39,105 @@ class Association < ApplicationRecord
   belongs_to :idea, counter_cache: true
 
   belongs_to :through_association,
-             class_name: "Association",
+             class_name: 'Association',
              counter_cache: :indirect_associations_as_through_count,
              optional: true
 
   has_many   :indirect_associations_as_through,
-             class_name: "Association",
-             foreign_key: "through_association_id",
+             class_name: 'Association',
+             foreign_key: 'through_association_id',
              dependent: :destroy
 
   belongs_to :source_association,
-             class_name: "Association",
+             class_name: 'Association',
              counter_cache: :indirect_associations_as_source_count,
              optional: true
 
   has_many   :indirect_associations_as_source,
-             class_name: "Association",
-             foreign_key: "source_association_id",
+             class_name: 'Association',
+             foreign_key: 'source_association_id',
              dependent: :destroy
 
   belongs_to :indirect_terminus_model,
-             class_name: "Model",
-             foreign_key: "terminus_model_id",
+             class_name: 'Model',
+             foreign_key: 'terminus_model_id',
              counter_cache: :indirect_terminating_associations_count,
              optional: true
 
   belongs_to :indirect_origin_model,
-             class_name: "Model",
-             foreign_key: "origin_model_id",
+             class_name: 'Model',
+             foreign_key: 'origin_model_id',
              counter_cache: :indirect_originating_associations_count,
              optional: true
 
   belongs_to :direct_terminus_model,
-             class_name: "Model",
-             foreign_key: "terminus_model_id",
+             class_name: 'Model',
+             foreign_key: 'terminus_model_id',
              counter_cache: :direct_terminating_associations_count,
              optional: true
 
   belongs_to :direct_origin_model,
-             class_name: "Model",
-             foreign_key: "origin_model_id",
+             class_name: 'Model',
+             foreign_key: 'origin_model_id',
              counter_cache: :direct_originating_associations_count,
              optional: true
 
   belongs_to :terminus_model,
-             class_name: "Model",
+             class_name: 'Model',
              counter_cache: :terminating_associations_count,
              optional: true
 
   belongs_to :origin_model,
-             class_name: "Model",
+             class_name: 'Model',
              counter_cache: :originating_associations_count,
              optional: true
 
   # Indirect associations
 
-
-
   # Validations
 
-  with_options if: -> { form_step == "origin_model" } do |step|
-    step.validates :origin_model, presence: true
+  with_options if: -> { form_step == 'origin_model' } do
+    validates :origin_model, presence: true
   end
 
-  with_options if: -> { form_step == "terminus_model" } do |step|
-    step.validates :origin_model, presence: true
-    step.validates :terminus_model, presence: true
+  with_options if: -> { form_step == 'terminus_model' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
   end
 
-  with_options if: -> { form_step == "nature" } do |step|
-    step.validates :origin_model, presence: true
-    step.validates :terminus_model, presence: true
-    step.validates :nature, presence: true
+  with_options if: -> { form_step == 'nature' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
+    validates :nature, presence: true
   end
 
-  with_options if: -> { form_step == "foreign_key" } do |step|
-    step.validates :origin_model, presence: true
-    step.validates :terminus_model, presence: true
-    step.validates :nature, presence: true
-    step.validates :foreign_key, presence: true
+  with_options if: -> { form_step == 'foreign_key' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
+    validates :nature, presence: true
+    validates :foreign_key, presence: true
   end
 
-  with_options if: -> { form_step == "through" } do |step|
-    step.validates :origin_model, presence: true
-    step.validates :terminus_model, presence: true
-    step.validates :nature, presence: true
-    step.validates :through_association, presence: true
+  with_options if: -> { form_step == 'through' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
+    validates :nature, presence: true
+    validates :through_association, presence: true
   end
 
-  with_options if: -> { form_step == "source" } do |step|
-    step.validates :origin_model, presence: true
-    step.validates :terminus_model, presence: true
-    step.validates :nature, presence: true
-    step.validates :through_association, presence: true
-    step.validates :source_association, presence: true
+  with_options if: -> { form_step == 'source' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
+    validates :nature, presence: true
+    validates :through_association, presence: true
+    validates :source_association, presence: true
   end
 
-  with_options if: -> { form_step == "name" } do |step|
-    step.validates :origin_model, presence: true
-    step.validates :terminus_model, presence: true
-    step.validates :nature, presence: true
-    step.validates :name, presence: true, uniqueness: { scope: :origin_model_id }
+  with_options if: -> { form_step == 'name' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
+    validates :nature, presence: true
+    validates :name, presence: true, uniqueness: { scope: :origin_model_id }
   end
 
   scope :complete, -> { where(complete: true) }
@@ -156,17 +154,14 @@ class Association < ApplicationRecord
   end
 
   def normalize_name
-    self.foreign_key = self.foreign_key.try(:parameterize, separator: "_")
+    self.foreign_key = foreign_key.try(:parameterize, separator: '_')
   end
 
   def normalize_name
-    self.name = self.name.try(:parameterize, separator: "_")
+    self.name = name.try(:parameterize, separator: '_')
   end
 
   def set_complete
-    if name.present?
-      self.complete = true
-    end
+    self.complete = true if name.present?
   end
-  
 end

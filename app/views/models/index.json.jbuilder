@@ -1,1 +1,1 @@
-json.array! @models, partial: "models/model", as: :model
+json.array! @models, partial: 'models/model', as: :model

@@ -1,27 +1,27 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "users#update", type: :request do
+RSpec.describe 'users#update', type: :request do
   subject(:make_request) do
     jsonapi_put "/api/v1/users/#{user.id}", payload
   end
 
-  describe "basic update" do
+  describe 'basic update' do
     let!(:user) { create(:user) }
 
     let(:payload) do
       {
         data: {
           id: user.id.to_s,
-          type: "users",
+          type: 'users',
           attributes: {
             # ... your attrs here
-          },
-        },
+          }
+        }
       }
     end
 
     # Replace 'xit' with 'it' after adding attributes
-    xit "updates the resource" do
+    xit 'updates the resource' do
       expect(UserResource).to receive(:find).and_call_original
       expect do
         make_request

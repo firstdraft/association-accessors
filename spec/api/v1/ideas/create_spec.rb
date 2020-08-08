@@ -1,11 +1,11 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "ideas#create", type: :request do
+RSpec.describe 'ideas#create', type: :request do
   subject(:make_request) do
-    jsonapi_post "/api/v1/ideas", payload
+    jsonapi_post '/api/v1/ideas', payload
   end
 
-  describe "basic create" do
+  describe 'basic create' do
     let(:params) do
       {
         # ... your attrs here
@@ -14,13 +14,13 @@ RSpec.describe "ideas#create", type: :request do
     let(:payload) do
       {
         data: {
-          type: "ideas",
-          attributes: params,
-        },
+          type: 'ideas',
+          attributes: params
+        }
       }
     end
 
-    it "works" do
+    it 'works' do
       expect(IdeaResource).to receive(:build).and_call_original
       expect do
         make_request

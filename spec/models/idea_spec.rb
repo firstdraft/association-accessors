@@ -9,18 +9,18 @@
 #  updated_at         :datetime         not null
 #  user_id            :integer
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Idea, type: :model do
-  describe "Direct Associations" do
+  describe 'Direct Associations' do
     it { should have_many(:models) }
 
     it { should belong_to(:user) }
   end
 
-  describe "InDirect Associations" do
+  describe 'InDirect Associations' do
   end
 
-  describe "Validations" do
+  describe 'Validations' do
   end
 end

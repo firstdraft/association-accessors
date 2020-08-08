@@ -17,10 +17,10 @@
 #  updated_at                              :datetime         not null
 #  idea_id                                 :integer
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Model, type: :model do
-  describe "Direct Associations" do
+  describe 'Direct Associations' do
     it { should belong_to(:idea) }
 
     it { should have_many(:indirect_terminating_associations) }
@@ -36,7 +36,7 @@ RSpec.describe Model, type: :model do
     it { should have_many(:originating_associations) }
   end
 
-  describe "InDirect Associations" do
+  describe 'InDirect Associations' do
     it { should have_many(:terminus_models) }
 
     it { should have_many(:indirect_origin_models) }
@@ -44,6 +44,6 @@ RSpec.describe Model, type: :model do
     it { should have_many(:indirect_terminus_models) }
   end
 
-  describe "Validations" do
+  describe 'Validations' do
   end
 end
