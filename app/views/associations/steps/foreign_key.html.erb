@@ -44,7 +44,7 @@
               <% end %>
             <% end %>
 
-            <%= f.label :terminus_model_id %>
+            <%= f.label :terminus_model_id, "Which table do you want the method to return an associated record(s) from?" %>
             <%= f.collection_select :terminus_model_id, Model.all, :id, :to_s, {}, class: "form-control", disabled: true %>
             <% if terminus_model_id_was_invalid %>
               <% @association.errors.full_messages_for(:terminus_model_id).each do |message| %>
