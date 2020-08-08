@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :association do
+    get 'steps/show'
+    get 'steps/update'
+  end
   use_doorkeeper
   scope path: ApplicationResource.endpoint_namespace, defaults: { format: :jsonapi } do
     scope module: "api/v1", as: "api" do
