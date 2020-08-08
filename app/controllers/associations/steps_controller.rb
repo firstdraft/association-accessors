@@ -39,6 +39,8 @@ class Associations::StepsController < ApplicationController
         [:origin_model_id, :terminus_model_id, :nature, :through_association_id]
       when "source"
         [:origin_model_id, :terminus_model_id, :nature, :through_association_id, :source_association_id]
+      when "name"
+        [:origin_model_id, :terminus_model_id, :nature, :foreign_key, :through_association_id, :source_association_id, :name]
       end
 
   	params.require(:association).permit(permitted_attributes).merge(form_step: step)

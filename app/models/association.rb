@@ -36,6 +36,8 @@ class Association < ApplicationRecord
 
   # Direct associations
 
+  belongs_to :idea, counter_cache: true
+
   belongs_to :through_association,
              class_name: "Association",
              counter_cache: :indirect_associations_as_through_count,
@@ -135,7 +137,16 @@ class Association < ApplicationRecord
 
   scope :complete, -> { where(complete: true) }
 
+  after_validation :set_complete
+
   def to_s
     name
   end
+
+  def set_complete
+    if name.present?
+      self.complete = true
+    end
+  end
+  
 end
