@@ -12,6 +12,9 @@ class IndirectAssociationResource < ApplicationResource
 
   # Direct associations
 
+  belongs_to :terminus_model,
+             resource: ModelResource
+
   belongs_to :origin_model,
              resource: ModelResource
 
