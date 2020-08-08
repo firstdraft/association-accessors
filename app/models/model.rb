@@ -1,6 +1,11 @@
 class Model < ApplicationRecord
   # Direct associations
 
+  has_many   :terminating_indirect_associations,
+             :class_name => "IndirectAssociation",
+             :foreign_key => "terminus_model_id",
+             :dependent => :destroy
+
   has_many   :originating_indirect_associations,
              :class_name => "IndirectAssociation",
              :foreign_key => "origin_model_id",
