@@ -133,6 +133,8 @@ class Association < ApplicationRecord
     step.validates :source_association, presence: true
   end
 
+  scope :complete, -> { where(complete: true) }
+
   def to_s
     name
   end
