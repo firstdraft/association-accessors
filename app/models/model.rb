@@ -68,19 +68,19 @@ class Model < ApplicationRecord
 
   # Validations
 
-  validates :classified_name, presence: true, uniqueness: { scope: :idea_id }
+  validates :class_name, presence: true, uniqueness: { scope: :idea_id }
 
   # Scopes
 
   before_validation :normalize_name
   
   def normalize_name
-    self.plural_name = name.pluralize.parameterize("_")
+    self.plural_name = name.pluralize.parameterize(separator: "_")
     self.singular_name = plural_name.singularize
-    self.classified_name = singular_name.classify
+    self.class_name = singular_name.classify
   end
 
   def to_s
-    name
+    class_name
   end
 end

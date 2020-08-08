@@ -5,11 +5,20 @@
 
   <div class="card-body">
     <dl class="mb-1">
-      <dt>Name</dt>
-      <dd><%= model.name %></dd>
-
       <dt>Idea</dt>
       <dd><%= link_to model.idea, model.idea %></dd>
+
+      <dt>Entered name</dt>
+      <dd><%= model.name %></dd>
+
+      <dt>Classified name</dt>
+      <dd><%= model.class_name %></dd>
+
+      <dt>Pluralized name</dt>
+      <dd><%= model.plural_name %></dd>
+
+      <dt>Singularized name</dt>
+      <dd><%= model.singular_name %></dd>
 
     </dl>
 
