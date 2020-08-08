@@ -20,7 +20,7 @@ class Associations::StepsController < ApplicationController
   	permitted_attributes = case step
       when "origin_model"
         [:origin_model_id]
-      when "terminus_model_id"
+      when "terminus_model"
         [:origin_model_id, :terminus_model_id]
       when "nature"
         [:origin_model_id, :terminus_model_id, :nature]
