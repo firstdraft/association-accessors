@@ -1,0 +1,71 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    Indirect Association #<%= indirect_association.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+      <dt>Name</dt>
+      <!-- Display name start -->
+      <dd><%= indirect_association.name %></dd>
+      <!-- Display name end -->
+
+      <dt>Source association</dt>
+      <!-- Display source_association_id start -->
+      <dd><%= indirect_association.source_association_id %></dd>
+      <!-- Display source_association_id end -->
+
+      <dt>Source association type</dt>
+      <!-- Display source_association_type start -->
+      <dd><%= indirect_association.source_association_type %></dd>
+      <!-- Display source_association_type end -->
+
+      <dt>Through association</dt>
+      <!-- Display through_association_id start -->
+      <dd><%= indirect_association.through_association_id %></dd>
+      <!-- Display through_association_id end -->
+
+      <dt>Through association type</dt>
+      <!-- Display through_association_type start -->
+      <dd><%= indirect_association.through_association_type %></dd>
+      <!-- Display through_association_type end -->
+
+      <dt>Origin model</dt>
+      <!-- Display origin_model_id start -->
+      <dd><%= indirect_association.origin_model_id %></dd>
+      <!-- Display origin_model_id end -->
+
+      <dt>Terminus model</dt>
+      <!-- Display terminus_model_id start -->
+      <dd><%= indirect_association.terminus_model_id %></dd>
+      <!-- Display terminus_model_id end -->
+
+    </dl>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to_show_or_back indirect_association, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+
+      <!-- Edit link indirect_association start -->
+      <div class="col">
+        <%= link_to edit_indirect_association_url(indirect_association), class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+      <!-- Edit link indirect_association end -->
+
+      <!-- Delete link indirect_association start -->
+      <div class="col">
+        <%= link_to indirect_association, method: :delete, data: { confirm: "Do you really want to delete this indirect_association?" }, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+      <!-- Delete link indirect_association end -->
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%= time_ago_in_words(indirect_association.updated_at) %> ago
+  </div>
+</div>
