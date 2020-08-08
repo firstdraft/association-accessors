@@ -91,7 +91,7 @@
             <% end %>
 
             <%= f.label :through_association_id %>
-            <%= f.select :through_association_id, options_from_collection_for_select(Association.complete, :id, :to_s, @association.through_association_id), {}, class: "form-control" %>
+            <%= f.select :through_association_id, options_from_collection_for_select(Association.order(:name), :id, :to_s, @association.through_association_id), {}, class: "form-control" %>
             <% if through_association_id_was_invalid %>
               <% @association.errors.full_messages_for(:through_association_id).each do |message| %>
                 <div class="invalid-feedback d-flex">

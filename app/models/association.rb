@@ -137,6 +137,8 @@ class Association < ApplicationRecord
 
   scope :complete, -> { where(complete: true) }
 
+  default_scope { complete }
+
   after_validation :set_complete
 
   def to_s
