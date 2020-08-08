@@ -10,24 +10,18 @@
   <ul class="list-group list-group-flush">
     <% @idea.models.each do |model| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
-        <!-- Show link start -->
         <%= link_to model.to_s, model_path(model) %>
-        <!-- Show link end -->
 
-        <!-- Delete link start -->
         <%= link_to model, method: :delete, data: { confirm: "Do you really want to delete this model" } do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
-        <!-- Delete link end -->
 
       </li>
     <% end %>
 
     <div class="card-footer">
       <div class="collapse" id="idea_models_new_form">
-        <!-- New associationcollection form start -->
         <%= render partial: "ideas/idea_models_new_form" %>
-        <!-- New associationcollection form end -->
       </div>
     </div>
 

@@ -1,66 +1,36 @@
-<!-- Form indirect_association start -->
 <%= form_with(model: @indirect_association, local: true) do |f| %>
-<!-- Form indirect_association end -->
 
-  <!-- Label and input for name start -->
   <div class="form-group">
     <%= f.label :name %>
-    <!-- Input for name start -->
     <%= f.text_field :name, class: "form-control" %>
-    <!-- Input for name end -->
   </div>
-  <!-- Label and input for name end -->
 
-  <!-- Label and input for source_association_id start -->
   <div class="form-group">
     <%= f.label :source_association_id %>
-    <!-- Input for source_association_id start -->
     <%= f.text_field :source_association_id, class: "form-control" %>
-    <!-- Input for source_association_id end -->
   </div>
-  <!-- Label and input for source_association_id end -->
 
-  <!-- Label and input for source_association_type start -->
   <div class="form-group">
     <%= f.label :source_association_type %>
-    <!-- Input for source_association_type start -->
     <%= f.text_field :source_association_type, class: "form-control" %>
-    <!-- Input for source_association_type end -->
   </div>
-  <!-- Label and input for source_association_type end -->
 
-  <!-- Label and input for through_association_id start -->
   <div class="form-group">
     <%= f.label :through_association_id %>
-    <!-- Input for through_association_id start -->
     <%= f.text_field :through_association_id, class: "form-control" %>
-    <!-- Input for through_association_id end -->
   </div>
-  <!-- Label and input for through_association_id end -->
 
-  <!-- Label and input for through_association_type start -->
   <div class="form-group">
     <%= f.label :through_association_type %>
-    <!-- Input for through_association_type start -->
     <%= f.text_field :through_association_type, class: "form-control" %>
-    <!-- Input for through_association_type end -->
   </div>
-  <!-- Label and input for through_association_type end -->
 
-  <!-- Label and input for origin_model_id start -->
-  <!-- Input for origin_model_id start -->
   <%= f.hidden_field :origin_model_id, value: @model.id %>
-  <!-- Input for origin_model_id end -->
-  <!-- Label and input for origin_model_id end -->
 
-  <!-- Label and input for terminus_model_id start -->
   <div class="form-group">
     <%= f.label :terminus_model_id %>
-    <!-- Input for terminus_model_id start -->
     <%= f.text_field :terminus_model_id, class: "form-control" %>
-    <!-- Input for terminus_model_id end -->
   </div>
-  <!-- Label and input for terminus_model_id end -->
 
   <%= f.submit "Create indirect association", class: "btn btn-block btn-outline-secondary" %>
 <% end %>

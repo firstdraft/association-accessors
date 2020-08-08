@@ -6,14 +6,10 @@
   <div class="card-body">
     <dl class="mb-1">
       <dt>Name</dt>
-      <!-- Display name start -->
       <dd><%= idea.name %></dd>
-      <!-- Display name end -->
 
       <dt>User</dt>
-      <!-- Display user_id start -->
       <dd><%= idea.user_id %></dd>
-      <!-- Display user_id end -->
 
     </dl>
 
@@ -22,7 +18,6 @@
         <%= link_to_show_or_back idea, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
       </div>
 
-      <!-- Edit link idea start -->
       <div class="col">
         <% if current_user == @idea.user %>
           <%= link_to edit_idea_url(idea), class: "btn btn-block btn-sm btn-outline-secondary" do %>
@@ -30,9 +25,7 @@
           <% end %>
         <% end %>
       </div>
-      <!-- Edit link idea end -->
 
-      <!-- Delete link idea start -->
       <div class="col">
         <% if current_user == @idea.user %>
           <%= link_to idea, method: :delete, data: { confirm: "Do you really want to delete this idea?" }, class: "btn btn-block btn-outline-secondary" do %>
@@ -40,7 +33,6 @@
           <% end %>
         <% end %>
       </div>
-      <!-- Delete link idea end -->
     </div>
   </div>
 

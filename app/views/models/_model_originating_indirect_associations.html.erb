@@ -10,24 +10,18 @@
   <ul class="list-group list-group-flush">
     <% @model.originating_indirect_associations.each do |indirect_association| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
-        <!-- Show link start -->
         <%= link_to indirect_association.to_s, indirect_association_path(indirect_association) %>
-        <!-- Show link end -->
 
-        <!-- Delete link start -->
         <%= link_to indirect_association, method: :delete, data: { confirm: "Do you really want to delete this indirect_association" } do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
-        <!-- Delete link end -->
 
       </li>
     <% end %>
 
     <div class="card-footer">
       <div class="collapse" id="model_originating_indirect_associations_new_form">
-        <!-- New associationcollection form start -->
         <%= render partial: "models/model_originating_indirect_associations_new_form" %>
-        <!-- New associationcollection form end -->
       </div>
     </div>
 

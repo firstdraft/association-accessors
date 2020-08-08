@@ -1,7 +1,6 @@
 <% was_validated = direct_association.errors.any? %>
 
 <%= form_with(model: direct_association, local: true, novalidate: true, class: "mb-3") do |f| %>
-  <!-- Label and input for foreign_key start -->
   <div class="form-group">
     <% foreign_key_class = "form-control" %>
     <% foreign_key_was_invalid = direct_association.errors.include?(:foreign_key) %>
@@ -15,9 +14,7 @@
     <% end %>
 
     <%= f.label :foreign_key %>
-    <!-- Input for foreign_key start -->
     <%= f.text_field :foreign_key, class: foreign_key_class, placeholder: "Enter foreign key" %>
-    <!-- Input for foreign_key end -->
     <% if foreign_key_was_invalid %>
       <% direct_association.errors.full_messages_for(:foreign_key).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -26,8 +23,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for foreign_key end -->
-  <!-- Label and input for name start -->
   <div class="form-group">
     <% name_class = "form-control" %>
     <% name_was_invalid = direct_association.errors.include?(:name) %>
@@ -41,9 +36,7 @@
     <% end %>
 
     <%= f.label :name %>
-    <!-- Input for name start -->
     <%= f.text_field :name, class: name_class, placeholder: "Enter name" %>
-    <!-- Input for name end -->
     <% if name_was_invalid %>
       <% direct_association.errors.full_messages_for(:name).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -52,8 +45,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for name end -->
-  <!-- Label and input for origin_model_id start -->
   <div class="form-group">
     <% origin_model_id_class = "form-control" %>
     <% origin_model_id_was_invalid = direct_association.errors.include?(:origin_model_id) %>
@@ -67,9 +58,7 @@
     <% end %>
 
     <%= f.label :origin_model_id %>
-    <!-- Input for origin_model_id start -->
     <%= f.select :origin_model_id, options_from_collection_for_select(Model.all, :id, :to_s, @direct_association.origin_model_id), {}, class: "form-control" %>
-    <!-- Input for origin_model_id end -->
     <% if origin_model_id_was_invalid %>
       <% direct_association.errors.full_messages_for(:origin_model_id).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -78,8 +67,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for origin_model_id end -->
-  <!-- Label and input for terminus_model_id start -->
   <div class="form-group">
     <% terminus_model_id_class = "form-control" %>
     <% terminus_model_id_was_invalid = direct_association.errors.include?(:terminus_model_id) %>
@@ -93,9 +80,7 @@
     <% end %>
 
     <%= f.label :terminus_model_id %>
-    <!-- Input for terminus_model_id start -->
     <%= f.select :terminus_model_id, options_from_collection_for_select(Model.all, :id, :to_s, @direct_association.terminus_model_id), {}, class: "form-control" %>
-    <!-- Input for terminus_model_id end -->
     <% if terminus_model_id_was_invalid %>
       <% direct_association.errors.full_messages_for(:terminus_model_id).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -104,6 +89,5 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for terminus_model_id end -->
   <%= f.button class: "btn btn-outline-secondary btn-block" %>
 <% end %>
