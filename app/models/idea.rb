@@ -2,7 +2,7 @@ class Idea < ApplicationRecord
   # Direct associations
 
   has_many   :models,
-             :dependent => :destroy
+             dependent: :destroy
 
   belongs_to :user
 
@@ -15,5 +15,4 @@ class Idea < ApplicationRecord
   def to_s
     name
   end
-
 end

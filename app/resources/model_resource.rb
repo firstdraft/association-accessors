@@ -43,16 +43,15 @@ class ModelResource < ApplicationResource
     end
   end
 
-
   filter :origin_model_id, :integer do
     eq do |scope, value|
-      scope.eager_load(:direct_origin_models).where(:direct_associations => {:origin_model_id => value})
+      scope.eager_load(:direct_origin_models).where(direct_associations: { origin_model_id: value })
     end
   end
 
   filter :terminus_model_id, :integer do
     eq do |scope, value|
-      scope.eager_load(:direct_terminus_models).where(:direct_associations => {:terminus_model_id => value})
+      scope.eager_load(:direct_terminus_models).where(direct_associations: { terminus_model_id: value })
     end
   end
 end

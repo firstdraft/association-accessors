@@ -1,12 +1,12 @@
 class IdeasController < ApplicationController
-  before_action :current_user_must_be_idea_user, only: [:edit, :update, :destroy] 
+  before_action :current_user_must_be_idea_user, only: %i[edit update destroy]
 
-  before_action :set_idea, only: [:show, :edit, :update, :destroy]
+  before_action :set_idea, only: %i[show edit update destroy]
 
   # GET /ideas
   def index
     @q = Idea.ransack(params[:q])
-    @ideas = @q.result(:distinct => true).includes(:user, :models).page(params[:page]).per(10)
+    @ideas = @q.result(distinct: true).includes(:user, :models).page(params[:page]).per(10)
   end
 
   # GET /ideas/1
@@ -20,17 +20,16 @@ class IdeasController < ApplicationController
   end
 
   # GET /ideas/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /ideas
   def create
     @idea = Idea.new(idea_params)
 
     if @idea.save
-      message = 'Idea was successfully created.'
-      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-        redirect_back fallback_location: request.referrer, notice: message
+      message = "Idea was successfully created."
+      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referer, notice: message
       else
         redirect_to @idea, notice: message
       end
@@ -42,7 +41,7 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1
   def update
     if @idea.update(idea_params)
-      redirect_to @idea, notice: 'Idea was successfully updated.'
+      redirect_to @idea, notice: "Idea was successfully updated."
     else
       render :edit
     end
@@ -52,13 +51,12 @@ class IdeasController < ApplicationController
   def destroy
     @idea.destroy
     message = "Idea was successfully deleted."
-    if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-      redirect_back fallback_location: request.referrer, notice: message
+    if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+      redirect_back fallback_location: request.referer, notice: message
     else
       redirect_to ideas_url, notice: message
     end
   end
-
 
   private
 
@@ -69,13 +67,13 @@ class IdeasController < ApplicationController
     end
   end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_idea
-      @idea = Idea.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_idea
+    @idea = Idea.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def idea_params
-      params.require(:idea).permit(:name, :user_id)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def idea_params
+    params.require(:idea).permit(:name, :user_id)
+  end
 end

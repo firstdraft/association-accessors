@@ -13,7 +13,7 @@ class Api::V1::IdeasController < Api::V1::GraphitiController
     idea = IdeaResource.build(params)
 
     if idea.save
-      render jsonapi: idea, status: 201
+      render jsonapi: idea, status: :created
     else
       render jsonapi_errors: idea
     end
@@ -33,7 +33,7 @@ class Api::V1::IdeasController < Api::V1::GraphitiController
     idea = IdeaResource.find(params)
 
     if idea.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: idea
     end

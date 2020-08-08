@@ -13,7 +13,7 @@ class Api::V1::DirectAssociationsController < Api::V1::GraphitiController
     direct_association = DirectAssociationResource.build(params)
 
     if direct_association.save
-      render jsonapi: direct_association, status: 201
+      render jsonapi: direct_association, status: :created
     else
       render jsonapi_errors: direct_association
     end
@@ -33,7 +33,7 @@ class Api::V1::DirectAssociationsController < Api::V1::GraphitiController
     direct_association = DirectAssociationResource.find(params)
 
     if direct_association.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: direct_association
     end

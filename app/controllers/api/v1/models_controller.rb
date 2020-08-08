@@ -13,7 +13,7 @@ class Api::V1::ModelsController < Api::V1::GraphitiController
     model = ModelResource.build(params)
 
     if model.save
-      render jsonapi: model, status: 201
+      render jsonapi: model, status: :created
     else
       render jsonapi_errors: model
     end
@@ -33,7 +33,7 @@ class Api::V1::ModelsController < Api::V1::GraphitiController
     model = ModelResource.find(params)
 
     if model.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: model
     end

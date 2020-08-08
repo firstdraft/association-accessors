@@ -13,7 +13,7 @@ class Api::V1::IndirectAssociationsController < Api::V1::GraphitiController
     indirect_association = IndirectAssociationResource.build(params)
 
     if indirect_association.save
-      render jsonapi: indirect_association, status: 201
+      render jsonapi: indirect_association, status: :created
     else
       render jsonapi_errors: indirect_association
     end
@@ -33,7 +33,7 @@ class Api::V1::IndirectAssociationsController < Api::V1::GraphitiController
     indirect_association = IndirectAssociationResource.find(params)
 
     if indirect_association.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: indirect_association
     end

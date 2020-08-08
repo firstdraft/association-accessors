@@ -16,5 +16,4 @@ class DirectAssociationResource < ApplicationResource
              resource: ModelResource
 
   # Indirect associations
-
 end

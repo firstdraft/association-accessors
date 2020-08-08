@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ModelResource, type: :resource do
-  describe 'creating' do
+  describe "creating" do
     let(:payload) do
       {
         data: {
-          type: 'models',
-          attributes: { }
-        }
+          type: "models",
+          attributes: {},
+        },
       }
     end
 
@@ -15,23 +15,23 @@ RSpec.describe ModelResource, type: :resource do
       ModelResource.build(payload)
     end
 
-    it 'works' do
-      expect {
+    it "works" do
+      expect do
         expect(instance.save).to eq(true), instance.errors.full_messages.to_sentence
-      }.to change { Model.count }.by(1)
+      end.to change { Model.count }.by(1)
     end
   end
 
-  describe 'updating' do
+  describe "updating" do
     let!(:model) { create(:model) }
 
     let(:payload) do
       {
         data: {
           id: model.id.to_s,
-          type: 'models',
-          attributes: { } # Todo!
-        }
+          type: "models",
+          attributes: {}, # Todo!
+        },
       }
     end
 
@@ -39,25 +39,25 @@ RSpec.describe ModelResource, type: :resource do
       ModelResource.find(payload)
     end
 
-    xit 'works (add some attributes and enable this spec)' do
-      expect {
+    xit "works (add some attributes and enable this spec)" do
+      expect do
         expect(instance.update_attributes).to eq(true)
-      }.to change { model.reload.updated_at }
+      end.to change { model.reload.updated_at }
       # .and change { model.foo }.to('bar') <- example
     end
   end
 
-  describe 'destroying' do
+  describe "destroying" do
     let!(:model) { create(:model) }
 
     let(:instance) do
       ModelResource.find(id: model.id)
     end
 
-    it 'works' do
-      expect {
+    it "works" do
+      expect do
         expect(instance.destroy).to eq(true)
-      }.to change { Model.count }.by(-1)
+      end.to change { Model.count }.by(-1)
     end
   end
 end
