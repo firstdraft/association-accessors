@@ -1,5 +1,7 @@
 ActiveAdmin.register DirectAssociation do
 
+ permit_params :foreign_key, :name, :origin_model_id, :terminus_model_id
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
