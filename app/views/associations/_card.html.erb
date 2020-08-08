@@ -9,16 +9,16 @@
       <dd><%= association.name %></dd>
 
       <dt>Source association</dt>
-      <dd><%= association.source_association_id %></dd>
+      <dd><%= link_to association.source_association %></dd>
 
       <dt>Through association</dt>
-      <dd><%= association.through_association_id %></dd>
+      <dd><%= link_to association.through_association %></dd>
 
       <dt>Origin model</dt>
-      <dd><%= association.origin_model_id %></dd>
+      <dd><%= link_to association.origin_model %></dd>
 
       <dt>Terminus model</dt>
-      <dd><%= association.terminus_model_id %></dd>
+      <dd><%= link_to association.terminus_model %></dd>
 
       <dt>Foreign key</dt>
       <dd><%= association.foreign_key %></dd>
