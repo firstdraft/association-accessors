@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_08_180851) do
+ActiveRecord::Schema.define(version: 2020_08_08_191733) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -74,6 +74,9 @@ ActiveRecord::Schema.define(version: 2020_08_08_180851) do
     t.integer "direct_terminating_associations_count"
     t.integer "indirect_originating_associations_count"
     t.integer "indirect_terminating_associations_count"
+    t.string "classified_name"
+    t.string "singular_name"
+    t.string "plural_name"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|

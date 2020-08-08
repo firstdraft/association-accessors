@@ -3,12 +3,15 @@
 # Table name: models
 #
 #  id                                      :integer          not null, primary key
+#  classified_name                         :string
 #  direct_originating_associations_count   :integer
 #  direct_terminating_associations_count   :integer
 #  indirect_originating_associations_count :integer
 #  indirect_terminating_associations_count :integer
 #  name                                    :string
 #  originating_associations_count          :integer
+#  plural_name                             :string
+#  singular_name                           :string
 #  terminating_associations_count          :integer
 #  created_at                              :datetime         not null
 #  updated_at                              :datetime         not null
@@ -65,7 +68,15 @@ class Model < ApplicationRecord
 
   # Validations
 
+  validates :name, uniqueness: { scope: :idea_id }
+
   # Scopes
+
+  before_validation :normalize_name
+  
+  def normalize_name
+    self.name = self.name.singularize.camelize
+  end
 
   def to_s
     name
