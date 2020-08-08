@@ -126,6 +126,14 @@ class Association < ApplicationRecord
     validates :foreign_key, presence: true
   end
 
+  with_options if: -> { form_step == 'foreign_key_location' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
+    validates :nature, presence: true
+    validates :foreign_key, presence: true
+    validates :foreign_key_location_model, presence: true
+  end
+
   with_options if: -> { form_step == 'through' } do
     validates :origin_model, presence: true
     validates :terminus_model, presence: true
