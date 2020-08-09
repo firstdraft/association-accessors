@@ -150,27 +150,27 @@ class Association < ApplicationRecord
     validates :foreign_key, presence: true
   end
 
-  with_options if: -> { form_step == 'through' } do
-    validates :origin_model, presence: true
-    validates :terminus_model, presence: true
-    validates :nature, presence: true
-    validates :through_association, presence: true
-  end
-
   with_options if: -> { form_step == 'join_table' } do
     validates :origin_model, presence: true
     validates :terminus_model, presence: true
     validates :nature, presence: true
-    validates :through_association, presence: true
     validates :join_model, presence: true
+  end
+
+  with_options if: -> { form_step == 'through' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
+    validates :nature, presence: true
+    validates :join_model, presence: true
+    validates :through_association, presence: true
   end
 
   with_options if: -> { form_step == 'source' } do
     validates :origin_model, presence: true
     validates :terminus_model, presence: true
     validates :nature, presence: true
-    validates :through_association, presence: true
     validates :join_model, presence: true
+    validates :through_association, presence: true
     validates :source_association, presence: true
   end
 
