@@ -77,6 +77,38 @@
               <% end %>
             <% end %>
           </div>
+
+          <div class="form-group">
+            <% foreign_key_location_model_id_class = "custom-control-input" %>
+            <% foreign_key_location_model_id_was_invalid = @association.errors.include?(:foreign_key_location_model) %>
+
+            <% if was_validated %>
+              <% if foreign_key_location_model_id_was_invalid %>
+                <% foreign_key_location_model_id_class << " is-invalid" %>
+              <% else %>
+                <% foreign_key_location_model_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <label>In which table is the foreign key column located?</label>
+            <div class="custom-control custom-radio">
+              <%= f.radio_button :foreign_key_location_model_id, @association.origin_model_id, class: foreign_key_location_model_id_class, disabled: true %>
+              <%= f.label :foreign_key_location_model_id, @association.origin_model.plural_name.humanize, value: @association.origin_model_id, class:"custom-control-label" %>
+            </div>
+
+            <div class="custom-control custom-radio">
+              <%= f.radio_button :foreign_key_location_model_id, @association.terminus_model_id, class: foreign_key_location_model_id_class, disabled: true %>
+              <%= f.label :foreign_key_location_model_id, @association.terminus_model.plural_name.humanize, value: @association.terminus_model_id, class:"custom-control-label" %>
+            </div>
+
+            <% if nature_was_invalid %>
+              <% @association.errors.full_messages_for(:foreign_key_location_model).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
           
           <div class="form-group">
             <% foreign_key_class = "form-control" %>

@@ -32,7 +32,7 @@ class Association < ApplicationRecord
   enum nature: { 'direct' => 0, 'indirect' => 1 }
 
   cattr_accessor :form_steps do
-    %w[origin_model terminus_model nature foreign_key foreign_key_location through source name]
+    %w[origin_model terminus_model nature foreign_key_location foreign_key through source name]
   end
 
   attr_accessor :form_step
@@ -119,19 +119,19 @@ class Association < ApplicationRecord
     validates :nature, presence: true
   end
 
-  with_options if: -> { form_step == 'foreign_key' } do
-    validates :origin_model, presence: true
-    validates :terminus_model, presence: true
-    validates :nature, presence: true
-    validates :foreign_key, presence: true
-  end
-
   with_options if: -> { form_step == 'foreign_key_location' } do
     validates :origin_model, presence: true
     validates :terminus_model, presence: true
     validates :nature, presence: true
-    validates :foreign_key, presence: true
     validates :foreign_key_location_model, presence: true
+  end
+
+  with_options if: -> { form_step == 'foreign_key' } do
+    validates :origin_model, presence: true
+    validates :terminus_model, presence: true
+    validates :nature, presence: true
+    validates :foreign_key_location_model, presence: true
+    validates :foreign_key, presence: true
   end
 
   with_options if: -> { form_step == 'through' } do

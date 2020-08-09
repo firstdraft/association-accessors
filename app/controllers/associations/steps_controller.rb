@@ -15,7 +15,7 @@ class Associations::StepsController < ApplicationController
     if step == 'nature' && @association.indirect?
       jump_to(:through)
       render_wizard
-    elsif step == 'foreign_key_location' && @association.valid?
+    elsif step == 'foreign_key' && @association.valid?
       jump_to(:name)
       render_wizard
     else
@@ -37,10 +37,10 @@ class Associations::StepsController < ApplicationController
                              %i[origin_model_id terminus_model_id]
                            when 'nature'
                              %i[origin_model_id terminus_model_id nature]
+                           when 'foreign_key_location'
+                             %i[origin_model_id terminus_model_id nature foreign_key_location_model_id]
                            when 'foreign_key'
-                             %i[origin_model_id terminus_model_id nature foreign_key]
-                           when 'foreign_key'
-                             %i[origin_model_id terminus_model_id nature foreign_key foreign_key_location_model_id]
+                             %i[origin_model_id terminus_model_id nature foreign_key_location_model_id foreign_key]
                            when 'through'
                              %i[origin_model_id terminus_model_id nature through_association_id]
                            when 'source'
