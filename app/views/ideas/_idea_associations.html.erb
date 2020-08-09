@@ -1,12 +1,10 @@
 <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
-    Originating Associations
-
-    <%= link_to 'Add association', associations_path(association: { idea_id: @model.idea }), method: :post %>
+    Associations
   </div>
 
   <ul class="list-group list-group-flush">
-    <% @model.originating_associations.each do |association| %>
+    <% @idea.associations.each do |association| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
         <%= link_to association.to_s, association_path(association) %>
 

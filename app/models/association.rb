@@ -3,7 +3,7 @@
 # Table name: associations
 #
 #  id                                     :bigint           not null, primary key
-#  complete                               :boolean
+#  finished                               :boolean          default(FALSE)
 #  foreign_key                            :string
 #  indirect_associations_as_source_count  :integer
 #  indirect_associations_as_through_count :integer
@@ -13,20 +13,28 @@
 #  updated_at                             :datetime         not null
 #  foreign_key_location_model_id          :bigint
 #  idea_id                                :bigint           not null
-#  origin_model_id                        :integer
-#  source_association_id                  :integer
-#  terminus_model_id                      :integer
-#  through_association_id                 :integer
+#  origin_model_id                        :bigint
+#  source_association_id                  :bigint
+#  terminus_model_id                      :bigint
+#  through_association_id                 :bigint
 #
 # Indexes
 #
 #  index_associations_on_foreign_key_location_model_id  (foreign_key_location_model_id)
 #  index_associations_on_idea_id                        (idea_id)
+#  index_associations_on_origin_model_id                (origin_model_id)
+#  index_associations_on_source_association_id          (source_association_id)
+#  index_associations_on_terminus_model_id              (terminus_model_id)
+#  index_associations_on_through_association_id         (through_association_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (foreign_key_location_model_id => models.id)
 #  fk_rails_...  (idea_id => ideas.id)
+#  fk_rails_...  (origin_model_id => models.id)
+#  fk_rails_...  (source_association_id => associations.id)
+#  fk_rails_...  (terminus_model_id => models.id)
+#  fk_rails_...  (through_association_id => associations.id)
 #
 class Association < ApplicationRecord
   enum nature: { 'direct' => 0, 'indirect' => 1 }
@@ -153,17 +161,15 @@ class Association < ApplicationRecord
     validates :origin_model, presence: true
     validates :terminus_model, presence: true
     validates :nature, presence: true
-    validates :name, presence: true, uniqueness: { scope: %i[origin_model_id complete] }
+    validates :name, presence: true, uniqueness: { scope: %i[origin_model_id finished] }
   end
 
-  scope :complete, -> { where(complete: true) }
-
-  default_scope { complete }
+  scope :finished, -> { where(finished: true) }
 
   before_validation :normalize_foreign_key
   before_validation :normalize_name
 
-  after_validation :set_complete
+  after_validation :set_finished
 
   def to_s
     name
@@ -177,8 +183,8 @@ class Association < ApplicationRecord
     self.name = name.try(:parameterize, separator: '_')
   end
 
-  def set_complete
-    self.complete = true if name.present?
+  def set_finished
+    self.finished = true if name.present?
   end
 
   def options_for_nature_select

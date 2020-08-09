@@ -7,7 +7,15 @@
 #  name               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  user_id            :integer
+#  user_id            :bigint           not null
+#
+# Indexes
+#
+#  index_ideas_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 class Idea < ApplicationRecord
   # Direct associations
@@ -18,6 +26,8 @@ class Idea < ApplicationRecord
   belongs_to :user
 
   # Indirect associations
+
+  has_many :associations, through: :models, source: :originating_associations
 
   # Validations
 
