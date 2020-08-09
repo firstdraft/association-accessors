@@ -93,12 +93,12 @@
             <label>In which table is the foreign key column located?</label>
             <div class="custom-control custom-radio">
               <%= f.radio_button :foreign_key_location_model_id, @association.origin_model_id, class: foreign_key_location_model_id_class %>
-              <%= f.label :foreign_key_location_model_id, @association.origin_model.plural_name.humanize, value: @association.origin_model_id, class:"custom-control-label" %>
+              <%= f.label :foreign_key_location_model_id, @association.origin_model.plural_name.humanize.downcase, value: @association.origin_model_id, class:"custom-control-label" %>
             </div>
 
             <div class="custom-control custom-radio">
               <%= f.radio_button :foreign_key_location_model_id, @association.terminus_model_id, class: foreign_key_location_model_id_class %>
-              <%= f.label :foreign_key_location_model_id, @association.terminus_model.plural_name.humanize, value: @association.terminus_model_id, class:"custom-control-label" %>
+              <%= f.label :foreign_key_location_model_id, @association.terminus_model.plural_name.humanize.downcase, value: @association.terminus_model_id, class:"custom-control-label" %>
             </div>
 
             <% if nature_was_invalid %>

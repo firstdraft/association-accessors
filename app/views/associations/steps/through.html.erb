@@ -11,7 +11,7 @@
         <%= form_with(model: @association, url: wizard_path, local: true, novalidate: true, class: "mb-3") do |f| %>
           <div class="form-group">
             <% origin_model_id_class = "form-control" %>
-            <% origin_model_id_was_invalid = @association.errors.include?(:origin_model_id) %>
+            <% origin_model_id_was_invalid = @association.errors.include?(:origin_model) %>
 
             <% if was_validated %>
               <% if origin_model_id_was_invalid %>
@@ -22,7 +22,7 @@
             <% end %>
 
             <%= f.label :origin_model_id, "Which class would you like to add an association accessor method to?" %>
-            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, {}, class: "form-control", disabled: true %>
+            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, {}, class: origin_model_id_class, disabled: true %>
             <% if origin_model_id_was_invalid %>
               <% @association.errors.full_messages_for(:origin_model).each do |message| %>
                 <div class="invalid-feedback d-flex">
@@ -68,7 +68,7 @@
             <% end %>
 
             <%= f.label :nature, "In this association, how is a row in the #{@association.origin_model.plural_name} table related to a row in the #{@association.terminus_model.plural_name} table?" %>
-            <%= f.collection_select :nature, @association.options_for_nature_select, :first, :last, { prompt: "Directly or indirectly?" }, class: nature_class %>
+            <%= f.collection_select :nature, @association.options_for_nature_select, :first, :last, { prompt: "Directly or indirectly?" }, class: nature_class, disabled: true %>
             <% if nature_was_invalid %>
               <% @association.errors.full_messages_for(:nature).each do |message| %>
                 <div class="invalid-feedback d-flex">
@@ -80,7 +80,7 @@
 
           <div class="form-group">
             <% through_association_id_class = "form-control" %>
-            <% through_association_id_was_invalid = @association.errors.include?(:through_association_id) %>
+            <% through_association_id_was_invalid = @association.errors.include?(:through_association) %>
 
             <% if was_validated %>
               <% if through_association_id_was_invalid %>
@@ -91,9 +91,9 @@
             <% end %>
 
             <%= f.label :through_association_id %>
-            <%= f.select :through_association_id, options_from_collection_for_select(Association.order(:name), :id, :to_s, @association.through_association_id), {}, class: "form-control" %>
+            <%= f.select :through_association_id, options_from_collection_for_select(Association.finished.order(:name), :id, :to_s, @association.through_association_id), { prompt: "Please select from one of your existing associations, or go create a new one." }, class: through_association_id_class %>
             <% if through_association_id_was_invalid %>
-              <% @association.errors.full_messages_for(:through_association_id).each do |message| %>
+              <% @association.errors.full_messages_for(:through_association).each do |message| %>
                 <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
