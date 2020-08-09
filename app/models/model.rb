@@ -9,7 +9,7 @@
 #  foreign_key_locations_count             :integer          default(0)
 #  indirect_originating_associations_count :integer
 #  indirect_terminating_associations_count :integer
-#  join_table_models_count                 :integer          default(0)
+#  join_models_count                       :integer          default(0)
 #  name                                    :string
 #  originating_associations_count          :integer
 #  plural_name                             :string

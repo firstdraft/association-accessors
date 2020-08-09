@@ -56,10 +56,10 @@ ActiveRecord::Schema.define(version: 2020_08_09_232925) do
     t.integer "indirect_associations_as_through_count"
     t.bigint "idea_id", null: false
     t.bigint "foreign_key_location_model_id"
-    t.bigint "join_table_model_id"
+    t.bigint "join_model_id"
     t.index ["foreign_key_location_model_id"], name: "index_associations_on_foreign_key_location_model_id"
     t.index ["idea_id"], name: "index_associations_on_idea_id"
-    t.index ["join_table_model_id"], name: "index_associations_on_join_table_model_id"
+    t.index ["join_model_id"], name: "index_associations_on_join_model_id"
     t.index ["origin_model_id"], name: "index_associations_on_origin_model_id"
     t.index ["source_association_id"], name: "index_associations_on_source_association_id"
     t.index ["terminus_model_id"], name: "index_associations_on_terminus_model_id"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_08_09_232925) do
     t.string "singular_name"
     t.string "plural_name"
     t.integer "foreign_key_locations_count", default: 0
-    t.integer "join_table_models_count", default: 0
+    t.integer "join_models_count", default: 0
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 2020_08_09_232925) do
   add_foreign_key "associations", "associations", column: "through_association_id"
   add_foreign_key "associations", "ideas"
   add_foreign_key "associations", "models", column: "foreign_key_location_model_id"
-  add_foreign_key "associations", "models", column: "join_table_model_id"
+  add_foreign_key "associations", "models", column: "join_model_id"
   add_foreign_key "associations", "models", column: "origin_model_id"
   add_foreign_key "associations", "models", column: "terminus_model_id"
   add_foreign_key "ideas", "users"

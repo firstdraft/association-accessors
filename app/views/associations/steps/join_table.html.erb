@@ -11,7 +11,7 @@
         <%= form_with(model: @association, url: wizard_path, local: true, novalidate: true, class: "mb-3") do |f| %>
           <div class="form-group">
             <% origin_model_id_class = "form-control" %>
-            <% origin_model_id_was_invalid = @association.errors.include?(:origin_model_id) %>
+            <% origin_model_id_was_invalid = @association.errors.include?(:origin_model) %>
 
             <% if was_validated %>
               <% if origin_model_id_was_invalid %>
@@ -79,30 +79,21 @@
           </div>
 
           <div class="form-group">
-            <% foreign_key_location_model_id_class = "custom-control-input" %>
-            <% foreign_key_location_model_id_was_invalid = @association.errors.include?(:foreign_key_location_model) %>
+            <% join_model_id_class = "form-control" %>
+            <% join_model_id_was_invalid = @association.errors.include?(:join_model) %>
 
             <% if was_validated %>
-              <% if foreign_key_location_model_id_was_invalid %>
-                <% foreign_key_location_model_id_class << " is-invalid" %>
+              <% if join_model_id_was_invalid %>
+                <% join_model_id_class << " is-invalid" %>
               <% else %>
-                <% foreign_key_location_model_id_class << " is-valid" %>
+                <% join_model_id_class << " is-valid" %>
               <% end %>
             <% end %>
 
-            <label>In which table is the foreign key column located?</label>
-            <div class="custom-control custom-radio">
-              <%= f.radio_button :foreign_key_location_model_id, @association.origin_model_id, class: foreign_key_location_model_id_class, disabled: true %>
-              <%= f.label :foreign_key_location_model_id, @association.origin_model.plural_name.humanize.downcase, value: @association.origin_model_id, class:"custom-control-label" %>
-            </div>
-
-            <div class="custom-control custom-radio">
-              <%= f.radio_button :foreign_key_location_model_id, @association.terminus_model_id, class: foreign_key_location_model_id_class, disabled: true %>
-              <%= f.label :foreign_key_location_model_id, @association.terminus_model.plural_name.humanize.downcase, value: @association.terminus_model_id, class:"custom-control-label" %>
-            </div>
-
-            <% if nature_was_invalid %>
-              <% @association.errors.full_messages_for(:foreign_key_location_model).each do |message| %>
+            <%= f.label :join_model_id %>
+            <%= f.select :join_model_id, options_from_collection_for_select(@association.idea.models.order(:plural_name), :id, :plural_name, @association.join_model_id), { prompt: "Please select from one of your existing tables, or go create a new one." }, class: join_model_id_class %>
+            <% if join_model_id_was_invalid %>
+              <% @association.errors.full_messages_for(:join_model).each do |message| %>
                 <div class="invalid-feedback d-flex">
                   <%= message %>
                 </div>
@@ -110,29 +101,6 @@
             <% end %>
           </div>
           
-          <div class="form-group">
-            <% foreign_key_class = "form-control" %>
-            <% foreign_key_was_invalid = @association.errors.include?(:foreign_key) %>
-
-            <% if was_validated %>
-              <% if foreign_key_was_invalid %>
-                <% foreign_key_class << " is-invalid" %>
-              <% else %>
-                <% foreign_key_class << " is-valid" %>
-              <% end %>
-            <% end %>
-
-            <%= f.label :foreign_key %>
-            <%= f.text_field :foreign_key, class: foreign_key_class, placeholder: "Enter foreign key" %>
-            <% if foreign_key_was_invalid %>
-              <% @association.errors.full_messages_for(:foreign_key).each do |message| %>
-                <div class="invalid-feedback d-flex">
-                  <%= message %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-
           <%= f.button class: "btn btn-outline-secondary btn-block" %>
         <% end %>
 
