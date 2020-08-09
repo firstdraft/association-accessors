@@ -43,6 +43,8 @@ class Associations::StepsController < ApplicationController
                              %i[origin_model_id terminus_model_id nature foreign_key_location_model_id foreign_key]
                            when 'through'
                              %i[origin_model_id terminus_model_id nature through_association_id]
+                           when 'join_table'
+                             %i[origin_model_id terminus_model_id nature through_association_id join_table_model_id source_association_id]
                            when 'source'
                              %i[origin_model_id terminus_model_id nature through_association_id source_association_id]
                            when 'name'

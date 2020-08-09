@@ -13,6 +13,7 @@
 #  updated_at                             :datetime         not null
 #  foreign_key_location_model_id          :bigint
 #  idea_id                                :bigint           not null
+#  join_table_model_id                    :bigint
 #  origin_model_id                        :bigint
 #  source_association_id                  :bigint
 #  terminus_model_id                      :bigint
@@ -22,6 +23,7 @@
 #
 #  index_associations_on_foreign_key_location_model_id  (foreign_key_location_model_id)
 #  index_associations_on_idea_id                        (idea_id)
+#  index_associations_on_join_table_model_id            (join_table_model_id)
 #  index_associations_on_origin_model_id                (origin_model_id)
 #  index_associations_on_source_association_id          (source_association_id)
 #  index_associations_on_terminus_model_id              (terminus_model_id)
@@ -31,6 +33,7 @@
 #
 #  fk_rails_...  (foreign_key_location_model_id => models.id)
 #  fk_rails_...  (idea_id => ideas.id)
+#  fk_rails_...  (join_table_model_id => models.id)
 #  fk_rails_...  (origin_model_id => models.id)
 #  fk_rails_...  (source_association_id => associations.id)
 #  fk_rails_...  (terminus_model_id => models.id)
