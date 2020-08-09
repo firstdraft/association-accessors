@@ -22,7 +22,7 @@
             <% end %>
 
             <%= f.label :origin_model_id, "Which class would you like to add an association accessor method to?" %>
-            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, {}, class: "form-control", disabled: true %>
+            <%= f.collection_select :origin_model_id, Model.all, :id, :to_s, {}, class: origin_model_id_class , disabled: true %>
             <% if origin_model_id_was_invalid %>
               <% @association.errors.full_messages_for(:origin_model).each do |message| %>
                 <div class="invalid-feedback d-flex">
