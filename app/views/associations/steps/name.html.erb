@@ -217,8 +217,17 @@
               <% end %>
             <% end %>
 
+            <% if @association.direct? %>
+              <% if @association.foreign_key_location_model == @association.terminus_model %>
+                <% suggested_name = @association.terminus_model.plural_name %>
+              <% elsif @association.foreign_key_location_model == @association.origin_model %>
+                <% suggested_name = @association.terminus_model.singular_name %>
+              <% end %>
+            <% elsif @association.direct? %>
+            <% end %>
+
             <%= f.label :name %>
-            <%= f.text_field :name, class: name_class, placeholder: "Enter name", value: @association.terminus_model.plural_name %>
+            <%= f.text_field :name, class: name_class, placeholder: "Enter name", value: suggested_name %>
             <% if name_was_invalid %>
               <% @association.errors.full_messages_for(:name).each do |message| %>
                 <div class="invalid-feedback d-flex">
