@@ -170,7 +170,7 @@
                 <% end %>
               <% end %>
 
-              <%= f.label :through_association_id, "Which association leads from the #{@association.origin_model.class_name} to the #{@association.join_model.class_name}?" %>
+              <%= f.label :through_association_id, "Which association leads from the origin #{@association.origin_model.class_name} to the joining #{@association.join_model.class_name}?" %>
               <%= f.select :through_association_id, options_from_collection_for_select(Association.finished.where(origin_model_id: @association.origin_model_id, terminus_model_id: @association.join_model_id).order(:name), :id, :to_s, @association.through_association_id), { prompt: "Please select an existing #{@association.origin_model.class_name} association that returns #{@association.join_model.singular_name.indefinitize}(s)." }, class: through_association_id_class, disabled: true %>
               <% if through_association_id_was_invalid %>
                 <% @association.errors.full_messages_for(:through_association).each do |message| %>
@@ -193,7 +193,7 @@
                 <% end %>
               <% end %>
 
-              <%= f.label :source_association_id, "Which association leads from the #{@association.join_model.class_name} to the #{@association.terminus_model.class_name}?" %>
+              <%= f.label :source_association_id, "Which association leads from the joining #{@association.join_model.class_name} to the destination #{@association.terminus_model.class_name}?" %>
               <%= f.select :source_association_id, options_from_collection_for_select(Association.finished.where(origin_model_id: @association.join_model_id, terminus_model_id: @association.terminus_model_id).order(:name), :id, :to_s, @association.source_association_id), { prompt: "Please select an existing #{@association.join_model.class_name} association that returns #{@association.terminus_model.singular_name.indefinitize}(s)." }, class: source_association_id_class, disabled: true %>
               <% if source_association_id_was_invalid %>
                 <% @association.errors.full_messages_for(:source_association).each do |message| %>
