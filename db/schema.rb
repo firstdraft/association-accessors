@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 2020_08_09_232925) do
     t.boolean "finished", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "indirect_associations_as_source_count"
-    t.integer "indirect_associations_as_through_count"
+    t.integer "indirect_associations_as_source_count", default: 0
+    t.integer "indirect_associations_as_through_count", default: 0
     t.bigint "idea_id", null: false
     t.bigint "foreign_key_location_model_id"
     t.bigint "join_model_id"
@@ -80,12 +80,12 @@ ActiveRecord::Schema.define(version: 2020_08_09_232925) do
     t.integer "idea_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "originating_associations_count"
-    t.integer "terminating_associations_count"
-    t.integer "direct_originating_associations_count"
-    t.integer "direct_terminating_associations_count"
-    t.integer "indirect_originating_associations_count"
-    t.integer "indirect_terminating_associations_count"
+    t.integer "originating_associations_count", default: 0
+    t.integer "terminating_associations_count", default: 0
+    t.integer "direct_originating_associations_count", default: 0
+    t.integer "direct_terminating_associations_count", default: 0
+    t.integer "indirect_originating_associations_count", default: 0
+    t.integer "indirect_terminating_associations_count", default: 0
     t.string "class_name"
     t.string "singular_name"
     t.string "plural_name"

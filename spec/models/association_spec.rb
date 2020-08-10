@@ -5,8 +5,8 @@
 #  id                                     :bigint           not null, primary key
 #  finished                               :boolean          default(FALSE)
 #  foreign_key                            :string
-#  indirect_associations_as_source_count  :integer
-#  indirect_associations_as_through_count :integer
+#  indirect_associations_as_source_count  :integer          default(0)
+#  indirect_associations_as_through_count :integer          default(0)
 #  name                                   :string
 #  nature                                 :integer
 #  created_at                             :datetime         not null
