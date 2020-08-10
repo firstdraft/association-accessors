@@ -133,7 +133,7 @@
               <% end %>
             <% end %>
 
-            <%= f.label :foreign_key %>
+            <%= f.label :foreign_key, "What is the foreign key column called?" %>
             <%= f.text_field :foreign_key, class: foreign_key_class, placeholder: "Enter foreign key" %>
             <% if foreign_key_was_invalid %>
               <% @association.errors.full_messages_for(:foreign_key).each do |message| %>

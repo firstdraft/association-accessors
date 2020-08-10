@@ -124,7 +124,7 @@
                 <% end %>
               <% end %>
 
-              <%= f.label :foreign_key %>
+              <%= f.label :foreign_key, "What is the foreign key column called?" %>
               <%= f.text_field :foreign_key, class: foreign_key_class, placeholder: "Enter foreign key", disabled: true %>
               <% if foreign_key_was_invalid %>
                 <% @association.errors.full_messages_for(:foreign_key).each do |message| %>
@@ -226,7 +226,7 @@
             <% elsif @association.direct? %>
             <% end %>
 
-            <%= f.label :name %>
+            <%= f.label :name, "What do you want to call this assocation between #{@association.origin_model.plural_name} and #{@association.terminus_model.plural_name}?" %>
             <%= f.text_field :name, class: name_class, placeholder: "Enter name", value: suggested_name %>
             <% if name_was_invalid %>
               <% @association.errors.full_messages_for(:name).each do |message| %>
