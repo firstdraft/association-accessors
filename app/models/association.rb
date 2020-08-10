@@ -211,4 +211,7 @@ class Association < ApplicationRecord
     ]
   end
   
+  def belongs_to?
+    foreign_key_location_model == origin_model
+  end
 end

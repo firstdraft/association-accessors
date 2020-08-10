@@ -218,13 +218,17 @@
             <% end %>
 
             <% if @association.direct? %>
-              <% if @association.foreign_key_location_model == @association.terminus_model %>
-                <% suggested_name = @association.terminus_model.plural_name %>
-              <% elsif @association.foreign_key_location_model == @association.origin_model %>
+              <% if @association.belongs_to? %>
                 <% suggested_name = @association.foreign_key.chomp("_id") %>
+              <% else %>
+                <% suggested_name = @association.terminus_model.plural_name %>
               <% end %>
             <% elsif @association.indirect? %>
-              <% suggested_name = @association.source_association.name %>
+              <% if @association.through_association.belongs_to? && @association.source_association.belongs_to? %>
+                <% suggested_name = @association.source_association.name %>
+              <% else %>
+                <% suggested_name = @association.source_association.name.pluralize %>
+              <% end %>
             <% end %>
 
             <%= f.label :name, "What do you want to call this assocation between #{@association.origin_model.plural_name} and #{@association.terminus_model.plural_name}?" %>
