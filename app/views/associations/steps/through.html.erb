@@ -79,6 +79,29 @@
           </div>
 
           <div class="form-group">
+            <% join_model_id_class = "form-control" %>
+            <% join_model_id_was_invalid = @association.errors.include?(:join_model) %>
+
+            <% if was_validated %>
+              <% if join_model_id_was_invalid %>
+                <% join_model_id_class << " is-invalid" %>
+              <% else %>
+                <% join_model_id_class << " is-valid" %>
+              <% end %>
+            <% end %>
+
+            <%= f.label :join_model_id, "Which table is the joining record located in?" %>
+            <%= f.select :join_model_id, options_from_collection_for_select(@association.idea.models.order(:plural_name), :id, :plural_name, @association.join_model_id), { prompt: "Please select from one of your existing tables, or go create a new one." }, class: join_model_id_class, disabled: true %>
+            <% if join_model_id_was_invalid %>
+              <% @association.errors.full_messages_for(:join_model).each do |message| %>
+                <div class="invalid-feedback d-flex">
+                  <%= message %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="form-group">
             <% through_association_id_class = "form-control" %>
             <% through_association_id_was_invalid = @association.errors.include?(:through_association) %>
 
@@ -90,8 +113,8 @@
               <% end %>
             <% end %>
 
-            <%= f.label :through_association_id %>
-            <%= f.select :through_association_id, options_from_collection_for_select(Association.finished.order(:name), :id, :to_s, @association.through_association_id), { prompt: "Please select from one of your existing associations, or go create a new one." }, class: through_association_id_class %>
+            <%= f.label :through_association_id, "Which association leads from the #{@association.origin_model.class_name} to the #{@association.join_model.class_name}?" %>
+            <%= f.select :through_association_id, options_from_collection_for_select(Association.finished.where(origin_model_id: @association.origin_model_id, terminus_model_id: @association.join_model_id).order(:name), :id, :to_s, @association.through_association_id), { prompt: "Please select an existing #{@association.origin_model.class_name} association that returns #{@association.join_model.singular_name.indefinitize}(s)." }, class: through_association_id_class %>
             <% if through_association_id_was_invalid %>
               <% @association.errors.full_messages_for(:through_association).each do |message| %>
                 <div class="invalid-feedback d-flex">
