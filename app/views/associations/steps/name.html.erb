@@ -223,7 +223,8 @@
               <% elsif @association.foreign_key_location_model == @association.origin_model %>
                 <% suggested_name = @association.foreign_key.chomp("_id") %>
               <% end %>
-            <% elsif @association.direct? %>
+            <% elsif @association.indirect? %>
+              <% suggested_name = @association.source_association.name %>
             <% end %>
 
             <%= f.label :name, "What do you want to call this assocation between #{@association.origin_model.plural_name} and #{@association.terminus_model.plural_name}?" %>
