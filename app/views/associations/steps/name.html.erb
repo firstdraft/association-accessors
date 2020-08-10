@@ -221,7 +221,7 @@
               <% if @association.foreign_key_location_model == @association.terminus_model %>
                 <% suggested_name = @association.terminus_model.plural_name %>
               <% elsif @association.foreign_key_location_model == @association.origin_model %>
-                <% suggested_name = @association.terminus_model.singular_name %>
+                <% suggested_name = @association.foreign_key.chomp("_id") %>
               <% end %>
             <% elsif @association.direct? %>
             <% end %>
