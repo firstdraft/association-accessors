@@ -6,17 +6,28 @@
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
-    <% if @association.belongs_to? %>
+    <div class="card">
+      <div class="card-body">
+      <p class="lead">You said that you want to define an instance method called <%= @association.name %> on the <%= @association.origin_model.class_name %> class.</p>
+      
+      <p class="lead">You said that it was an indirect association, and that, in this relationship, a <%= @association.origin_model.singular_name %> is related to a <%= @association.terminus_model.singular_name %> through a <%= @association.join_model.singular_name %>. To get from the origin <%= @association.origin_model.singular_name %> to the joining <%= @association.join_model.singular_name %>, you said to use the existing <%= @association.origin_model.class_name %> method called <%= @association.through_association.name %>.</p>
+
+      <p class="lead">To get from the joining <%= @association.join_model.singular_name %> to the destination <%= @association.terminus_model.singular_name %>, you said to use the existing <%= @association.join_model.class_name %> method called <%= @association.source_association.name %>.</p>
+
+      <p class="lead">Okay! With that info, we can help you write your association accessor method:</p>
+      <% if @association.belongs_to? %>
 <%= render "direct_long_belongs_to", language: :ruby %>
-    <% elsif @association.direct_has_many? %>
+      <% elsif @association.direct_has_many? %>
 <%= render "direct_long_has_many" %>
-    <% elsif @association.indirect_many_one? %>
+      <% elsif @association.indirect_many_one? %>
 <%= render "indirect_long_many_one" %>
-    <% elsif @association.indirect_many_many? %>
+      <% elsif @association.indirect_many_many? %>
 <%= render "indirect_long_many_many" %>
-    <% elsif @association.indirect_one_one? %>
+      <% elsif @association.indirect_one_one? %>
 <%= render "indirect_long_one_one" %>
-    <% end %>
+      <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
