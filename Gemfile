@@ -23,6 +23,7 @@ gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'ransack'
 gem 'rollbar'
+gem 'rouge'
 gem 'rouge-rails'
 gem 'rspec-rails'
 gem 'rubocop-rails', '2.5.2', require: false

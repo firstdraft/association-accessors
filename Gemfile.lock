@@ -411,6 +411,7 @@ DEPENDENCIES
   rails (~> 6.0.2, >= 6.0.2.2)
   ransack
   rollbar
+  rouge
   rouge-rails
   rspec-rails
   rubocop-rails (= 2.5.2)
