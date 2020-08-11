@@ -4,7 +4,7 @@
   </div>
 
   <ul class="list-group list-group-flush">
-    <% @idea.associations.each do |association| %>
+    <% @idea.associations.finished.each do |association| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
         <%= link_to association.to_s, association_path(association) %>
 

@@ -7,20 +7,9 @@
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
     <% if @association.belongs_to? %>
-
-<%= render "belongs_to_accessor", language: :ruby %>
-
-    <% elsif true %>
-      <pre>
-        <code>
-    
-
-<% formatter = Rouge::Formatters::HTML.new %>
-<% formatter = Rouge::Formatters::HTMLPygments.new(formatter, css_class='codehilite') %>
-<% lexer = Rouge::Lexers::Ruby.new %>
-<%= formatter.format(lexer.lex(render "belongs_to_accessor")).html_safe %>
-        </code>
-      </pre>
+<%= render "direct_belongs_to_long", language: :ruby %>
+    <% elsif @association.direct_has_many? %>
+<%= render "direct_has_many_long" %>
     <% elsif true %>
 
 my_comments = self.comments

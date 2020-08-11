@@ -1,0 +1,18 @@
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  def #{@association.name}
+    my_#{@association.foreign_key} = self.#{@association.foreign_key}
+
+    matching_#{@association.terminus_model.plural_name} = #{@association.terminus_model.class_name}.where({ :id => my_#{@association.foreign_key} })
+
+    the_#{@association.terminus_model.singular_name} = matching_#{@association.terminus_model.plural_name}.at(0)
+
+    return the_#{@association.terminus_model.singular_name}
+  end
+
+  # ...
+end
+CODE
+)).html_safe %>

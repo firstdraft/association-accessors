@@ -6,7 +6,10 @@ class AssociationsController < ApplicationController
     @associations = @q.result(distinct: true).includes(:origin_model, :terminus_model, :direct_origin_model, :direct_terminus_model, :indirect_origin_model, :indirect_terminus_model, :indirect_associations_as_source, :source_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_source, :source_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_through, :through_association, :indirect_associations_as_through, :through_association).page(params[:page]).per(10)
   end
 
-  def show; end
+  def show
+    @formatter = Rouge::Formatters::HTMLPygments.new(Rouge::Formatters::HTML.new, css_class='codehilite')
+    @lexer = Rouge::Lexers::Ruby.new
+  end
 
   def new
     @association = Association.new

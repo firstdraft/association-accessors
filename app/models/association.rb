@@ -214,4 +214,8 @@ class Association < ApplicationRecord
   def belongs_to?
     foreign_key_location_model == origin_model
   end
+
+  def direct_has_many?
+    direct? && !belongs_to?
+  end
 end
