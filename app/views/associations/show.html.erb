@@ -8,11 +8,11 @@
   <div class="col-md-8">
     <div class="card">
       <div class="card-body">
-      <p class="lead">You said that you want to define an instance method called <%= @association.name %> on the <%= @association.origin_model.class_name %> class.</p>
+      <p class="lead">You said that you want to define an instance method called <code><%= @association.name %></code> on the <code><%= @association.origin_model.class_name %></code> class.</p>
       
-      <p class="lead">You said that it was an indirect association, and that, in this relationship, a <%= @association.origin_model.singular_name %> is related to a <%= @association.terminus_model.singular_name %> through a <%= @association.join_model.singular_name %>. To get from the origin <%= @association.origin_model.singular_name %> to the joining <%= @association.join_model.singular_name %>, you said to use the existing <%= @association.origin_model.class_name %> method called <%= @association.through_association.name %>.</p>
+      <p class="lead">You said that it was an indirect association, and that, in this relationship, <%= @association.origin_model.singular_name.indefinitize %> is related to <%= @association.terminus_model.plural_name %> through <%= @association.join_model.plural_name %>. To get from the origin <%= @association.origin_model.singular_name %> to the joining <%= @association.join_model.plural_name %>, you said to use the existing <code><%= @association.origin_model.class_name %></code> method called <code><%= @association.through_association.name %></code>.</p>
 
-      <p class="lead">To get from the joining <%= @association.join_model.singular_name %> to the destination <%= @association.terminus_model.singular_name %>, you said to use the existing <%= @association.join_model.class_name %> method called <%= @association.source_association.name %>.</p>
+      <p class="lead">To get from each joining <%= @association.join_model.singular_name %> to the destination <%= @association.terminus_model.singular_name %>, you said to use the existing <code><%= @association.join_model.class_name %></code> method called <code><%= @association.source_association.name %></code>.</p>
 
       <p class="lead">Okay! With that info, we can help you write your association accessor method:</p>
       <% if @association.belongs_to? %>
@@ -30,6 +30,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  const e = document.querySelector('#origin_model_class_name');
+  const annotation = annotate(e, { type: 'underline' });
+  annotation.show();
+</script>
 
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
