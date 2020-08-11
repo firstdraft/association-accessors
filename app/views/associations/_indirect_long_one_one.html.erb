@@ -5,9 +5,9 @@ class #{@association.origin_model.class_name}
   def #{@association.name}
     my_#{@association.through_association.name} = self.#{@association.through_association.name}
 
-    #{@association.source_association.name.singularize} = my_#{@association.through_association.name}.#{@association.source_association.name}
+    the_#{@association.source_association.name.singularize} = my_#{@association.through_association.name}.#{@association.source_association.name}
 
-    return #{@association.source_association.name.singularize}
+    return the_#{@association.source_association.name.singularize}
   end
 
   # ...
