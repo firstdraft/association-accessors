@@ -23,6 +23,7 @@ gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'ransack'
 gem 'rollbar'
+gem 'rouge-rails'
 gem 'rspec-rails'
 gem 'rubocop-rails', '2.5.2', require: false
 gem 'sass-rails', '>= 6'
@@ -40,6 +41,8 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
 end

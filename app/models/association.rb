@@ -210,7 +210,7 @@ class Association < ApplicationRecord
       ['indirect', "Indirectly: the #{origin_model.singular_name} and the #{terminus_model.singular_name} both have an association to a third, joining, record."]
     ]
   end
-  
+
   def belongs_to?
     foreign_key_location_model == origin_model
   end
