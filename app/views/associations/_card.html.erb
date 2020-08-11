@@ -22,11 +22,11 @@
         <dd><%= association.foreign_key %></dd>
 
       <% elsif association.indirect? %>
-        <dt>Source association</dt>
-        <dd><%= link_to association.source_association %></dd>
-
         <dt>Through association</dt>
-        <dd><%= link_to association.through_association %></dd>
+        <dd><%= link_to association.through_association, association.through_association %></dd>
+
+        <dt>Source association</dt>
+        <dd><%= link_to association.source_association, association.source_association %></dd>
       <% end %>
     </dl>
 

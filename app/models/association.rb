@@ -218,4 +218,16 @@ class Association < ApplicationRecord
   def direct_has_many?
     direct? && !belongs_to?
   end
+
+  def indirect_many_one?
+    indirect? && !through_association.belongs_to? && source_association.belongs_to?
+  end
+
+  def indirect_many_many?
+    indirect? && !through_association.belongs_to? && !source_association.belongs_to?
+  end
+
+  def indirect_one_one?
+    indirect? && through_association.belongs_to? && source_association.belongs_to?
+  end
 end

@@ -1,0 +1,26 @@
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  def #{@association.name}
+    array_of_#{@association.terminus_model.singular_name}_ids = Array.new
+
+    my_#{@association.through_association.name} = self.#{@association.through_association.name}
+
+    my_#{@association.through_association.name}.each do |a_#{@association.join_model.singular_name}|
+      #{@association.through_association.name.singularize}_#{@association.source_association.name} = a_user.#{@association.source_association.name}
+
+      #{@association.through_association.name.singularize}_#{@association.source_association.name}.each do |a_#{@association.terminus_model.singular_name}|
+        array_of_#{@association.terminus_model.singular_name}_ids.push(a_#{@association.terminus_model.singular_name}.id)
+      end
+    end
+
+    matching_#{@association.terminus_model.plural_name} = #{@association.terminus_model.class_name}.where({ :id => array_of_#{@association.terminus_model.singular_name}_ids })
+
+    return matching_#{@association.terminus_model.plural_name}
+  end
+  
+  # ...
+end
+CODE
+)).html_safe %>

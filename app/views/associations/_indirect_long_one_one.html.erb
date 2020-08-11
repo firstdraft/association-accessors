@@ -1,0 +1,16 @@
+<%= @formatter.format(@lexer.lex(<<-CODE
+class #{@association.origin_model.class_name}
+  # ...
+
+  def #{@association.name}
+    my_#{@association.through_association.name} = self.#{@association.through_association.name}
+
+    #{@association.source_association.name.singularize} = my_#{@association.through_association.name}.#{@association.source_association.name}
+
+    return #{@association.source_association.name.singularize}
+  end
+
+  # ...
+end
+CODE
+)).html_safe %>

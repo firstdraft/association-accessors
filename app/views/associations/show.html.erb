@@ -7,47 +7,15 @@
 <div class="row justify-content-center mb-3">
   <div class="col-md-8">
     <% if @association.belongs_to? %>
-<%= render "direct_belongs_to_long", language: :ruby %>
+<%= render "direct_long_belongs_to", language: :ruby %>
     <% elsif @association.direct_has_many? %>
-<%= render "direct_has_many_long" %>
-    <% elsif true %>
-
-my_comments = self.comments
-
-array_of_photo_ids = Array.new
-
-my_comments.each do |a_comment|
-  array_of_photo_ids.push(a_comment.photo_id)
-end
-
-matching_photos = Photo.where({ :id => array_of_photo_ids })
-
-unique_matching_photos = matching_photos.distinct
-
-return unique_matching_photos
-        </code>
-      </pre>
-    <% elsif true %>
-      <pre>
-        <code>
-array_of_photo_ids = Array.new
-
-my_leaders = self.leaders
-
-my_leaders.each do |a_user|
-  leader_own_photos = a_user.own_photos
-
-
-  leader_own_photos.each do |a_photo|
-    array_of_photo_ids.push(a_photo.id)
-  end
-end
-
-matching_photos = Photo.where({ :id => array_of_photo_ids })
-
-return matching_photos
-        </code>
-      </pre>
+<%= render "direct_long_has_many" %>
+    <% elsif @association.indirect_many_one? %>
+<%= render "indirect_long_many_one" %>
+    <% elsif @association.indirect_many_many? %>
+<%= render "indirect_long_many_many" %>
+    <% elsif @association.indirect_one_one? %>
+<%= render "indirect_long_one_one" %>
     <% end %>
   </div>
 </div>
