@@ -231,7 +231,7 @@
               <% end %>
             <% end %>
 
-            <%= f.label :name, "What do you want to call this assocation between #{@association.origin_model.plural_name} and #{@association.terminus_model.plural_name}?" %>
+            <%= f.label :name, "What do you want to call this association between #{@association.origin_model.plural_name} and #{@association.terminus_model.plural_name}?" %>
             <%= f.text_field :name, class: name_class, placeholder: "Enter name", value: suggested_name %>
             <% if name_was_invalid %>
               <% @association.errors.full_messages_for(:name).each do |message| %>
