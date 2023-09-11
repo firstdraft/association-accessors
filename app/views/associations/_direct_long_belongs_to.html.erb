@@ -29,10 +29,10 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  belongs_to(:#{@association.name}, {
+  belongs_to(:#{@association.name},
     :class_name => "#{@association.parent_model.class_name}",
     :foreign_key => "#{@association.foreign_key}"
-  })
+  )
   
   # ...
 end
@@ -49,11 +49,11 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  belongs_to(:#{@association.name}, {
+  belongs_to(:#{@association.name},
     :class_name => "#{@association.parent_model.class_name}",
     :foreign_key => "#{@association.foreign_key}",
     :required => true
-  })
+  )
   
   # ...
 end
@@ -75,9 +75,9 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  belongs_to(:#{@association.name}, {
+  belongs_to(:#{@association.name},
     :class_name => "#{@association.parent_model.class_name}"
-  })
+  )
   
   # ...
 end
@@ -104,9 +104,9 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  belongs_to(:#{@association.name}, {
+  belongs_to(:#{@association.name},
     :foreign_key => "#{@association.foreign_key}"
-  })
+  )
   
   # ...
 end
