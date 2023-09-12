@@ -51,10 +51,10 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  has_many(:#{@association.name}, {
+  has_many(:#{@association.name},
     :through => :#{@association.through_association.name},
     :source => :#{@association.source_association.name}
-  })
+  )
   
   # ...
 end
@@ -89,9 +89,9 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  has_many(:#{@association.name}, {
+  has_many(:#{@association.name},
     :through => :#{@association.through_association.name}
-  })
+  )
   
   # ...
 end

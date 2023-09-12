@@ -27,10 +27,10 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  has_many(:#{@association.name}, {
+  has_many(:#{@association.name},
     :class_name => "#{@association.foreign_key_location_model.class_name}",
     :foreign_key => "#{@association.foreign_key}"
-  })
+  )
   
   # ...
 end
@@ -47,11 +47,11 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  has_many(:#{@association.name}, {
+  has_many(:#{@association.name},
     :class_name => "#{@association.foreign_key_location_model.class_name}",
     :foreign_key => "#{@association.foreign_key}",
     :dependent => :destroy
-  })
+  )
   
   # ...
 end
@@ -73,9 +73,9 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  has_many(:#{@association.name}, {
+  has_many(:#{@association.name},
     :foreign_key => "#{@association.foreign_key}"
-  })
+  )
   
   # ...
 end
@@ -102,9 +102,9 @@ CODE
 class #{@association.origin_model.class_name}
   # ...
 
-  has_many(:#{@association.name}, {
+  has_many(:#{@association.name},
     :class_name => "#{@association.foreign_key_location_model.class_name}"
-  })
+  )
   
   # ...
 end
