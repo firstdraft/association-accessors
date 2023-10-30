@@ -52,8 +52,8 @@ class #{@association.origin_model.class_name}
   # ...
 
   has_many(:#{@association.name},
-    :through => :#{@association.through_association.name},
-    :source => :#{@association.source_association.name}
+    through: :#{@association.through_association.name},
+    source: :#{@association.source_association.name}
   )
   
   # ...
@@ -90,7 +90,7 @@ class #{@association.origin_model.class_name}
   # ...
 
   has_many(:#{@association.name},
-    :through => :#{@association.through_association.name}
+    through: :#{@association.through_association.name}
   )
   
   # ...
