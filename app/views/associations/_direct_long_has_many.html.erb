@@ -28,8 +28,8 @@ class #{@association.origin_model.class_name}
   # ...
 
   has_many(:#{@association.name},
-    :class_name => "#{@association.foreign_key_location_model.class_name}",
-    :foreign_key => "#{@association.foreign_key}"
+    class_name: "#{@association.foreign_key_location_model.class_name}",
+    foreign_key: "#{@association.foreign_key}"
   )
   
   # ...
@@ -41,16 +41,16 @@ CODE
 
 <hr>
 
-<p class="lead">One of many advantages of using <a href="https://guides.rubyonrails.org/association_basics.html" target="_blank">ActiveRecord's built-in Associations</a> instead of hand-writing accessor methods is that we can add additional options to the configuration hash. For example, the <code>:dependent => :destroy</code> option is very often useful to add to the <code>has_many</code> side of a direct association:</p>
+<p class="lead">One of many advantages of using <a href="https://guides.rubyonrails.org/association_basics.html" target="_blank">ActiveRecord's built-in Associations</a> instead of hand-writing accessor methods is that we can add additional options to the configuration hash. For example, the <code>dependent: :destroy</code> option is very often useful to add to the <code>has_many</code> side of a direct association:</p>
 
 <%= @formatter.format(@lexer.lex(<<-CODE
 class #{@association.origin_model.class_name}
   # ...
 
   has_many(:#{@association.name},
-    :class_name => "#{@association.foreign_key_location_model.class_name}",
-    :foreign_key => "#{@association.foreign_key}",
-    :dependent => :destroy
+    class_name: "#{@association.foreign_key_location_model.class_name}",
+    foreign_key: "#{@association.foreign_key}",
+    dependent: :destroy
   )
   
   # ...
@@ -74,7 +74,7 @@ class #{@association.origin_model.class_name}
   # ...
 
   has_many(:#{@association.name},
-    :foreign_key => "#{@association.foreign_key}"
+    foreign_key: "#{@association.foreign_key}"
   )
   
   # ...
@@ -103,7 +103,7 @@ class #{@association.origin_model.class_name}
   # ...
 
   has_many(:#{@association.name},
-    :class_name => "#{@association.foreign_key_location_model.class_name}"
+    class_name: "#{@association.foreign_key_location_model.class_name}"
   )
   
   # ...
