@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :associations, only: %i[new create destroy edit show] do
     resources :steps, only: %i[show update], controller: 'associations/steps'
   end
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: "omniauth_callbacks",
+  }
   resources :models, except: :index
 end

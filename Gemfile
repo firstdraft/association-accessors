@@ -9,7 +9,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 gem 'bootstrap4-kaminari-views'
 gem 'coffee-rails'
-gem 'devise', '~> 4.7.2'
+gem 'devise', '~> 4.9.2'
 gem 'doorkeeper', '~> 5.4.0'
 gem 'graphiti', '~> 1.2'
 gem 'graphiti-rails', github: 'firstdraft/graphiti-rails', branch: 'develop'
@@ -19,7 +19,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 gem 'ransack'
 gem 'rollbar'
@@ -33,11 +33,14 @@ gem 'sprockets', '~> 3.7'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'vandal_ui', '~> 0.4'
 gem 'wicked'
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'graphiti_spec_helpers'
+  gem "dotenv-rails"
 end
 
 group :development do
