@@ -51,10 +51,23 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[github]
 
   def self.from_omniauth(auth)
-    find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.github_access_token = auth.credentials.token
+    user = find_by(email: auth.info.email)
+    if user
+      user.update(
+        provider: auth.provider,
+        uid: auth.uid,
+        github_access_token: auth.credentials.token
+      )
+    else
+      user = create do |new_user|
+        new_user.provider = auth.provider
+        new_user.uid = auth.uid
+        new_user.email = auth.info.email
+        new_user.password = Devise.friendly_token[0, 20]
+        new_user.github_access_token = auth.credentials.token
+      end
     end
+
+    user
   end
 end
