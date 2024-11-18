@@ -9,7 +9,7 @@
 <p class="lead">Okay! With that info, we can help you write a method that makes it easy to query this relationship:</p>
 
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   def #{@association.name}
@@ -48,7 +48,7 @@ CODE
 <p class="lead">But, here's a shorthand notation for telling Rails the same things you said when you filled out the wizard:</p>
 
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   has_many(:#{@association.name},
@@ -86,7 +86,7 @@ CODE
 <p class="lead">Since the name of the new method you want to define, <code><%= @association.name %></code>, matches the name of the source association, <code><%= @association.source_association.name %></code>, you can leave it out of the shorthand; and Rails will assume that's the method you want it to call on the joining <code><%= @association.join_model.class_name %></code>:</p>
 
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   has_many(:#{@association.name},

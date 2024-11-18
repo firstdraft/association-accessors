@@ -5,7 +5,7 @@
 <p class="lead">Okay! With that info, we can help you write a method that makes it easy to query this relationship:</p>
 
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   def #{@association.name}
@@ -26,7 +26,7 @@ CODE
 <p class="lead">But, here's a shorthand notation for telling Rails the same things you said when you filled out the wizard:</p>
 
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   belongs_to(:#{@association.name},
@@ -46,7 +46,7 @@ CODE
 <p class="lead">One of many advantages of using <a href="https://guides.rubyonrails.org/association_basics.html" target="_blank">ActiveRecord's built-in Associations</a> instead of hand-writing accessor methods is that we can add additional options to the configuration hash. For example, the <code>required: true</code> option is very often useful to add to the <code>belongs_to</code> side of a direct association:</p>
 
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   belongs_to(:#{@association.name},
@@ -72,7 +72,7 @@ CODE
     <p class="lead">Since the name of the foreign key column, <code><%=@association.foreign_key %></code>, matches the name of the method you're defining, <code><%= @association.name %></code>, you can leave the <code>:foreign_key</code> option out of the hash; and Rails will infer the foreign key column you want to use:</p>
     
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   belongs_to(:#{@association.name},
@@ -90,7 +90,7 @@ CODE
 
     <% if @association.can_eliminate_foreign_key? %>
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   belongs_to(:#{@association.name})
@@ -101,7 +101,7 @@ CODE
 )).html_safe %>
     <% else %>
 <%= @formatter.format(@lexer.lex(<<-CODE
-class #{@association.origin_model.class_name}
+class #{@association.origin_model.class_name} < ApplicationRecord
   # ...
 
   belongs_to(:#{@association.name},
