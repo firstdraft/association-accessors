@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.3'
+ruby '3.1.3'
 
-gem 'activeadmin', '~> 2.10'
+gem 'activeadmin', '~> 2.13'
 gem 'activerecord-import'
 # gem 'bootsnap', '>= 1.4.2', require: false
 gem 'logger'
+gem 'psych', '< 4'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 gem 'bootstrap4-kaminari-views'
 gem 'coffee-rails'
@@ -27,18 +28,18 @@ gem 'rollbar'
 gem 'rouge'
 gem 'rouge-rails'
 gem 'rspec-rails'
-gem 'rubocop-rails', '2.5.2', require: false
+gem 'rubocop-rails', '~> 2.17', require: false
 gem 'sass-rails', '>= 6'
-gem 'shoulda-matchers'
+gem 'shoulda-matchers', '~> 5.0'
 gem 'sprockets', '~> 3.7'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'vandal_ui', '~> 0.4'
 gem 'wicked'
-gem "omniauth-github"
+gem "omniauth-github", "~> 1.4"
 gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '~> 6.2'
   gem 'faker'
   gem 'graphiti_spec_helpers'
   gem "dotenv-rails"
