@@ -3,13 +3,13 @@ databases:
     databaseName: association_accessors
     user: association_accessors
     region: ohio
-    plan: basic
+    plan: basic-256mb
 
 services:
   - type: web
     name: association-accessors
     region: ohio
-    plan: basic
+    plan: starter
     runtime: ruby
     healthCheckPath: /up
     buildCommand: "./bin/render-build.sh"
