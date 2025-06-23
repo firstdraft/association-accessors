@@ -57,7 +57,7 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
       user.github_access_token = auth.credentials.token
-      user.save
+      user.save!
     else
       user = create do |new_user|
         new_user.provider = auth.provider
